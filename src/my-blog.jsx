@@ -246,7 +246,7 @@ export default function MyBlog() {
 
       {/* ═══ FOOTER ═══ */}
       <Footer links={[
-        { label: "LinkedIn", href: "https://www.linkedin.com/in/gaganbnh/" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/gbn97/" },
         { label: "Medium", href: "https://medium.com/@ananidzezitze" },
         { label: "GitHub", href: "https://github.com/AnanidzeZitze?tab=repositories" },
         { label: "Tableau", href: "https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes" }
