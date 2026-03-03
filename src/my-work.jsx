@@ -208,10 +208,11 @@ export default function MyWork() {
       </section>
 
       <Footer links={[
-        { label: "Home", href: "/" },
-        { label: "Blog", href: "/my-marketing-blog" },
+        { label: "LinkedIn", href: "https://linkedin.com" },
         { label: "Medium", href: "https://medium.com/@ananidzezitze" },
-        { label: "GitHub", href: "https://github.com/AnanidzeZitze?tab=repositories" }
+        { label: "GitHub", href: "https://github.com/AnanidzeZitze?tab=repositories" },
+        { label: "Tableau", href: "https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes" },
+        { label: "Email", href: "mailto:gagan.97@gmail.com" }
       ]} />
     </>
   );
