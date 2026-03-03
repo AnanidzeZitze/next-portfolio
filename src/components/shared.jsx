@@ -146,18 +146,19 @@ export function MagneticCursor() {
         <>
             <div className="cursor-outer" style={{
                 position: "fixed", zIndex: 99998, pointerEvents: "none",
-                width: hovering ? "50px" : "32px", height: hovering ? "50px" : "32px",
-                borderRadius: "50%", border: `1px solid ${hovering ? "var(--saffron)" : "rgba(255,255,255,0.15)"}`,
+                width: hovering ? "40px" : "24px", height: hovering ? "40px" : "24px",
+                border: `1.5px solid ${hovering ? "var(--saffron)" : "rgba(255,255,255,0.2)"}`,
                 left: pos.x, top: pos.y,
-                transform: `translate(-50%, -50%) scale(${clicking ? 0.8 : 1})`,
-                transition: "width 0.3s, height 0.3s, border-color 0.3s, transform 0.15s",
+                transform: `translate(-50%, -50%) rotate(${hovering ? 45 : 0}deg) scale(${clicking ? 0.8 : 1})`,
+                transition: "width 0.3s, height 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(0.16,1,0.3,1)",
                 mixBlendMode: "difference",
             }} />
             <div style={{
                 position: "fixed", zIndex: 99998, pointerEvents: "none",
-                width: hovering ? "6px" : "4px", height: hovering ? "6px" : "4px",
-                borderRadius: "50%", background: "var(--saffron)",
-                left: pos.x, top: pos.y, transform: "translate(-50%, -50%)",
+                width: hovering ? "0px" : "4px", height: hovering ? "0px" : "4px",
+                background: "var(--saffron)",
+                left: pos.x, top: pos.y,
+                transform: "translate(-50%, -50%) rotate(45deg)",
                 transition: "width 0.2s, height 0.2s",
             }} />
         </>

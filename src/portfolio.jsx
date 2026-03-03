@@ -520,8 +520,7 @@ export default function Apex() {
         { label: "LinkedIn", href: "https://linkedin.com" },
         { label: "Medium", href: "https://medium.com/@ananidzezitze" },
         { label: "GitHub", href: "https://github.com/AnanidzeZitze?tab=repositories" },
-        { label: "Tableau", href: "https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes" },
-        { label: "Email", href: "mailto:gagan.97@gmail.com" }
+        { label: "Tableau", href: "https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes" }
       ]} />
     </>
   );
