@@ -83,7 +83,7 @@ function Hero() {
 
         {/* CTAs with ripple effect */}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(30px)", transition: "all 0.9s cubic-bezier(0.16,1,0.3,1) 1.6s" }}>
-          <a href="#experience" data-magnetic className="btn-primary" style={{
+          <a href="/my-marketing-work" data-magnetic className="btn-primary" style={{
             position: "relative", overflow: "hidden",
             padding: "14px 36px", background: "var(--saffron)", color: "var(--bg)", textDecoration: "none",
             fontFamily: "var(--body)", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
@@ -105,10 +105,10 @@ function Hero() {
         opacity: loaded ? heroOpacity : 0, transition: "opacity 1.2s ease 1.8s",
       }}>
         <div style={{ position: "relative" }}>
-          <div style={{ width: "280px", height: "360px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)" }}>
+          <div style={{ width: "320px", height: "420px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)" }}>
             <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=1067,fit=crop/kP0de2JiSFqeEpCY/img_0395-VnMPjZWGGJ2ZMv1S.png" alt="Gagan" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "contrast(1.05) saturate(0.9)" }} />
           </div>
-          <GlassPanel style={{ position: "absolute", bottom: "-20px", left: "-40px", padding: "14px 18px" }}>
+          <GlassPanel style={{ position: "absolute", bottom: "-24px", left: "-50px", padding: "16px 20px" }}>
             <div style={{ fontFamily: "var(--body)", fontSize: "9px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--saffron)", marginBottom: "4px" }}>Status</div>
             <div style={{ fontFamily: "var(--display)", fontSize: "16px", fontWeight: 600, color: "#fff" }}>Open to Opportunities</div>
           </GlassPanel>
@@ -232,6 +232,7 @@ function Experience() {
 
           {/* LEFT — Role selector cards */}
           <div style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
+            <div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "16px", marginTop: "12px" }}>Professional Experience</div>
             {roles.map((r, i) => {
               const isActive = activeRole === i;
               return (
@@ -331,7 +332,7 @@ function Experience() {
                       <div style={{ fontFamily: "var(--display)", fontSize: "16px", fontWeight: 600, color: "#fff", marginBottom: "6px", lineHeight: 1.3 }}>{ed.degree}</div>
                       <div style={{ fontFamily: "var(--body)", fontSize: "13px", color: "rgba(255,255,255,0.3)", display: "flex", alignItems: "center", gap: "6px" }}><span>{ed.flag}</span> {ed.school}, {ed.loc}</div>
                     </div>
-                    <div style={{ fontFamily: "var(--display)", fontSize: "28px", fontWeight: 600, color: ed.accent, opacity: 0.2 }}>{ed.gpa}</div>
+                    <div style={{ fontFamily: "var(--display)", fontSize: "28px", fontWeight: 600, color: ed.accent, opacity: 0.85, textShadow: `0 0 20px ${ed.accent}44` }}>{ed.gpa}</div>
                   </div>
                 </TiltCard>
               ))}
@@ -357,17 +358,19 @@ function Skills() {
   return (
     <section id="skills" style={{ padding: "120px 0", position: "relative", overflow: "hidden" }}>
       <KolamMotif size={450} color="var(--lime)" animate style={{ position: "absolute", left: "-120px", bottom: "-80px" }} />
-      <div style={{ maxWidth: "1100px", margin: "0 auto 60px", padding: "0 var(--px)", position: "relative" }}>
-        <Reveal>
-          <div style={{ display: "flex", alignItems: "baseline", gap: "20px" }}>
-            <span style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "var(--lime)" }}>003</span>
-            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(32px, 4vw, 50px)", fontWeight: 600, color: "#fff", letterSpacing: "-1.5px", margin: 0 }}>Arsenal<span style={{ color: "var(--lime)" }}>.</span></h2>
-          </div>
-        </Reveal>
+      <div style={{ padding: "0 var(--px)" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto 80px", position: "relative" }}>
+          <Reveal>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "20px" }}>
+              <span style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "var(--lime)" }}>003</span>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(32px, 4vw, 50px)", fontWeight: 600, color: "#fff", letterSpacing: "-1.5px", margin: 0 }}>Arsenal<span style={{ color: "var(--lime)" }}>.</span></h2>
+            </div>
+          </Reveal>
+        </div>
       </div>
 
       {/* Marquee rows */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
         {rows.map((row, ri) => (
           <Reveal key={ri} delay={ri * 0.12}>
             <div style={{ position: "relative" }}>
@@ -425,9 +428,9 @@ function Skills() {
 // ═══════════════════════════════════════════════════════════
 function WorkPreview() {
   const projects = [
-    { title: "Analytics Dashboards", desc: "Interactive Tableau dashboards — marketing performance, segmentation, KPI tracking.", link: "https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes", accent: "var(--steel)" },
-    { title: "Financial Models", desc: "3-statement, DCF & LBO models for $10M+ strategic decisions.", link: "#", accent: "var(--saffron)" },
-    { title: "Web & Brand Design", desc: "Full website builds, campaign assets, and brand identity systems.", link: "https://moody-head-244737.framer.app/", accent: "var(--lime)" },
+    { title: "Analytics Dashboards", desc: "Interactive Tableau dashboards — marketing performance, segmentation, KPI tracking.", link: "https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes", accent: "var(--steel)", download: false },
+    { title: "Financial Models", desc: "3-statement, DCF & LBO models for $10M+ strategic decisions.", link: "/Financial_Models.xlsx", accent: "var(--saffron)", download: "Financial_Models.xlsx" },
+    { title: "Web & Brand Design", desc: "Full website builds, campaign assets, and brand identity systems.", link: "https://moody-head-244737.framer.app/", accent: "var(--lime)", download: false },
   ];
   return (
     <section style={{ padding: "120px var(--px)" }}>
@@ -444,11 +447,11 @@ function WorkPreview() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "3px" }} className="work-grid">
           {projects.map((p, i) => (
             <Reveal key={i} delay={i * 0.1}>
-              <a href={p.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", display: "block" }}>
+              <a href={p.link} download={p.download ? p.download : undefined} target={p.download ? undefined : "_blank"} rel="noopener noreferrer" style={{ textDecoration: "none", display: "block", height: "100%" }}>
                 <TiltCard glowColor={p.accent} style={{ padding: "36px 32px", height: "100%" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "24px" }}>
                     <div style={{ width: "40px", height: "3px", background: p.accent }} />
-                    <span style={{ fontFamily: "var(--body)", fontSize: "14px", color: p.accent }}>↗</span>
+                    <span style={{ fontFamily: "var(--body)", fontSize: "14px", color: p.accent }}>{p.download ? "↓" : "↗"}</span>
                   </div>
                   <div style={{ fontFamily: "var(--display)", fontSize: "22px", fontWeight: 600, color: "#fff", marginBottom: "10px" }}>{p.title}</div>
                   <div style={{ fontFamily: "var(--body)", fontSize: "14px", lineHeight: 1.7, color: "rgba(255,255,255,0.4)" }}>{p.desc}</div>

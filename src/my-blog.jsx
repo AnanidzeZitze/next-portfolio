@@ -37,7 +37,7 @@ export default function MyBlog() {
       {!loaded && <Preloader onComplete={onDone} />}
       {loaded && <MagneticCursor />}
       <GradientMesh />
-      <Nav 
+      <Nav
         links={[{ href: "/", label: "Home" }, { href: "/my-marketing-work", label: "Work" }, { href: "/my-marketing-blog", label: "Blog", active: true }]}
       />
 
@@ -170,7 +170,7 @@ export default function MyBlog() {
             {!feedLoaded && (
               <div style={{ padding: "20px" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px" }}>
-                  {[1,2,3,4,5,6].map(i => (
+                  {[1, 2, 3, 4, 5, 6].map(i => (
                     <div key={i} style={{ padding: "0" }}>
                       <Skeleton height="180px" />
                       <div style={{ padding: "16px 0" }}>
@@ -245,11 +245,12 @@ export default function MyBlog() {
 
       {/* ═══ FOOTER ═══ */}
       <Footer links={[
-          { label: "Home", href: "/" },
-          { label: "Work", href: "/my-marketing-work" },
-          { label: "Medium", href: "https://medium.com/@ananidzezitze" },
-          { label: "GitHub", href: "https://github.com/AnanidzeZitze?tab=repositories" }
-        ]} />
+        { label: "LinkedIn", href: "https://linkedin.com" },
+        { label: "Medium", href: "https://medium.com/@ananidzezitze" },
+        { label: "GitHub", href: "https://github.com/AnanidzeZitze?tab=repositories" },
+        { label: "Tableau", href: "https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes" },
+        { label: "Email", href: "mailto:gagan.97@gmail.com" }
+      ]} />
     </>
   );
 }

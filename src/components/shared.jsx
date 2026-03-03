@@ -381,7 +381,7 @@ export function Nav({ links = [], pages = [] }) {
 export function Footer({ links }) {
     return (
         <footer style={{ padding: "28px var(--px)", borderTop: "1px solid rgba(255,255,255,0.04)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
-            <span style={{ fontFamily: "var(--body)", fontSize: "11px", color: "rgba(255,255,255,0.12)" }}>© 2025 Gagan Bhaskar Naik</span>
+            <span style={{ fontFamily: "var(--body)", fontSize: "11px", color: "rgba(255,255,255,0.12)" }}>© 2026 Gagan Bhaskar Naik</span>
             <div style={{ display: "flex", gap: "20px" }}>
                 {links.map((l, i) => (
                     <a key={i} href={l.href} target={l.href.startsWith("/") || l.href.startsWith("mailto") ? undefined : "_blank"} rel="noopener noreferrer"
