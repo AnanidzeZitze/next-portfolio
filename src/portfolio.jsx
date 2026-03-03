@@ -10,7 +10,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
  */
 
 import { useScroll, useInView } from "./hooks/index.js";
-import { Preloader, MagneticCursor, GradientMesh, Reveal, TiltCard, GlassPanel, KolamMotif, Nav, Footer, GlobalStyles } from "./components/shared.jsx";
+import { Preloader, MagneticCursor, GradientMesh, Reveal, TiltCard, GlassPanel, KolamMotif, Nav, Footer, GlobalStyles, clamp } from "./components/shared.jsx";
+
 
 // ═══════════════════════════════════════════════════════════
 //  HERO — Kinetic Typography + Parallax
@@ -45,7 +46,7 @@ function Hero() {
 
         {/* KINETIC TYPOGRAPHY — staggered character reveal with distortion */}
         <h1 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "clamp(48px, 8vw, 100px)", lineHeight: 1.0, letterSpacing: "-3px", color: "#fff", margin: "0 0 8px" }}>
-          {["G","a","g","a","n"," ","B","h","a","s","k","a","r"].map((c, i) => (
+          {["G", "a", "g", "a", "n", " ", "B", "h", "a", "s", "k", "a", "r"].map((c, i) => (
             <span key={i} className="hero-char" style={{
               display: "inline-block",
               opacity: loaded ? 1 : 0,
@@ -56,7 +57,7 @@ function Hero() {
           ))}
           <br />
           {/* Outlined "Naik" — stroke-path style */}
-          {["N","a","i","k"].map((c, i) => (
+          {["N", "a", "i", "k"].map((c, i) => (
             <span key={i} style={{
               display: "inline-block",
               opacity: loaded ? 1 : 0,
@@ -244,8 +245,8 @@ function Experience() {
                       transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
                       transform: isActive ? "translateX(4px)" : "none",
                     }}
-                    onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = "rgba(255,255,255,0.02)"; e.currentTarget.style.boxShadow = `0 0 0 1px rgba(255,255,255,0.08)`; }}}
-                    onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = "rgba(255,255,255,0.01)"; e.currentTarget.style.boxShadow = "0 0 0 1px rgba(255,255,255,0.04)"; }}}>
+                    onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = "rgba(255,255,255,0.02)"; e.currentTarget.style.boxShadow = `0 0 0 1px rgba(255,255,255,0.08)`; } }}
+                    onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = "rgba(255,255,255,0.01)"; e.currentTarget.style.boxShadow = "0 0 0 1px rgba(255,255,255,0.04)"; } }}>
                     <div style={{ fontFamily: "var(--display)", fontSize: "16px", fontWeight: 600, color: isActive ? "#fff" : "rgba(255,255,255,0.5)", transition: "color 0.3s", marginBottom: "3px" }}>
                       {r.title}
                     </div>
@@ -501,7 +502,7 @@ export default function Apex() {
       {!loaded && <Preloader onComplete={onPreloaderComplete} />}
       {loaded && <MagneticCursor />}
       <GradientMesh />
-      <Nav 
+      <Nav
         links={[{ href: "#about", label: "About" }, { href: "#experience", label: "Experience" }, { href: "#skills", label: "Skills" }, { href: "#contact", label: "Contact" }]}
         pages={[{ href: "/my-marketing-work", label: "Work" }, { href: "/my-marketing-blog", label: "Blog" }]}
       />
