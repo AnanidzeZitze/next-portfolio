@@ -147,19 +147,19 @@ export function MagneticCursor() {
             <div className="cursor-outer" style={{
                 position: "fixed", zIndex: 99998, pointerEvents: "none",
                 width: hovering ? "40px" : "24px", height: hovering ? "40px" : "24px",
-                border: `1.5px solid ${hovering ? "var(--saffron)" : "rgba(255,255,255,0.2)"}`,
+                border: `1.5px ${hovering ? "solid var(--saffron)" : "dashed rgba(255,255,255,0.3)"}`,
                 left: pos.x, top: pos.y,
                 transform: `translate(-50%, -50%) rotate(${hovering ? 45 : 0}deg) scale(${clicking ? 0.8 : 1})`,
-                transition: "width 0.3s, height 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(0.16,1,0.3,1)",
+                transition: "width 0.3s, height 0.3s, border 0.3s, transform 0.3s cubic-bezier(0.16,1,0.3,1)",
                 mixBlendMode: "difference",
             }} />
             <div style={{
                 position: "fixed", zIndex: 99998, pointerEvents: "none",
-                width: hovering ? "0px" : "4px", height: hovering ? "0px" : "4px",
+                width: hovering ? "20px" : "6px", height: hovering ? "20px" : "6px",
                 background: "var(--saffron)",
                 left: pos.x, top: pos.y,
                 transform: "translate(-50%, -50%) rotate(45deg)",
-                transition: "width 0.2s, height 0.2s",
+                transition: "width 0.3s cubic-bezier(0.16,1,0.3,1), height 0.3s cubic-bezier(0.16,1,0.3,1)",
             }} />
         </>
     );

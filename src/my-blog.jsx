@@ -185,15 +185,15 @@ export default function MyBlog() {
             )}
 
             {/* RSS iframe */}
-            <div style={{ width: "100%", minHeight: "800px", display: feedLoaded ? "block" : "block" }}>
+            <div style={{ width: "100%", height: feedLoaded ? "auto" : "800px", minHeight: feedLoaded ? "1200px" : "auto", display: "block" }}>
               <iframe
                 width="100%"
-                height="1600"
+                height="100%"
                 src="https://rss.app/embed/v1/wall/Am3kjPWYpKWqVRPv"
                 frameBorder="0"
                 onLoad={() => setFeedLoaded(true)}
                 style={{
-                  width: "100%", height: "1600px", border: "none",
+                  width: "100%", minHeight: "1200px", border: "none",
                   background: "var(--bg)",
                   opacity: feedLoaded ? 1 : 0,
                   transition: "opacity 0.6s ease",
@@ -205,9 +205,10 @@ export default function MyBlog() {
       </section>
 
       {/* ═══ DUAL CTA — 3D Tilt Cards ═══ */}
-      <section style={{ padding: "0 var(--px) 120px" }}>
+      <section style={{ padding: "0 var(--px) 120px", position: "relative" }}>
+        <KolamMotif size={600} color="var(--steel)" animate style={{ position: "absolute", left: "50%", bottom: "0px", transform: "translateX(-50%)", opacity: 0.05, zIndex: 0 }} />
         <Reveal>
-          <div style={{ maxWidth: "1000px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3px" }} className="cta-grid">
+          <div style={{ maxWidth: "1000px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3px", position: "relative", zIndex: 2 }} className="cta-grid">
             <TiltCard glowColor="var(--saffron)" style={{ padding: "44px 36px" }}>
               <div style={{ width: "32px", height: "3px", background: "var(--saffron)", marginBottom: "24px" }} />
               <div style={{ fontFamily: "var(--display)", fontSize: "22px", fontWeight: 600, color: "#fff", margin: "0 0 10px" }}>Have a topic in mind?</div>
@@ -245,7 +246,7 @@ export default function MyBlog() {
 
       {/* ═══ FOOTER ═══ */}
       <Footer links={[
-        { label: "LinkedIn", href: "https://linkedin.com" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/gaganbnh/" },
         { label: "Medium", href: "https://medium.com/@ananidzezitze" },
         { label: "GitHub", href: "https://github.com/AnanidzeZitze?tab=repositories" },
         { label: "Tableau", href: "https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes" }

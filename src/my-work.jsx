@@ -195,9 +195,10 @@ export default function MyWork() {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: "0 var(--px) 120px" }}>
+      <section style={{ padding: "0 var(--px) 120px", position: "relative" }}>
+        <KolamMotif size={350} color="var(--steel)" animate style={{ position: "absolute", right: "-100px", bottom: "0px", opacity: 0.08 }} />
         <Reveal>
-          <div style={{ padding: "56px", textAlign: "center", maxWidth: "900px", margin: "0 auto", background: "rgba(12,10,8,0.5)", backdropFilter: "blur(16px) saturate(140%)", border: "1px solid rgba(255,255,255,0.04)", boxShadow: "0 10px 40px rgba(0,0,0,0.2)" }}>
+          <div style={{ padding: "56px", textAlign: "center", maxWidth: "900px", margin: "0 auto", background: "rgba(12,10,8,0.5)", backdropFilter: "blur(16px) saturate(140%)", border: "1px solid rgba(255,255,255,0.04)", boxShadow: "0 10px 40px rgba(0,0,0,0.2)", position: "relative", zIndex: 2 }}>
             <div style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 600, color: "#fff", margin: "0 0 16px" }}>Interested in working together<span style={{ color: "var(--saffron)" }}>?</span></div>
             <a href="mailto:gagan.97@gmail.com" data-magnetic style={{ display: "inline-block", padding: "14px 36px", background: "var(--saffron)", color: "var(--bg)", textDecoration: "none", fontFamily: "var(--body)", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", transition: "all 0.4s", boxShadow: "0 0 30px rgba(218,165,32,0.12)" }}
               onMouseEnter={e => { e.target.style.background = "#fff"; e.target.style.boxShadow = "0 0 50px rgba(255,255,255,0.08)"; }}
@@ -207,7 +208,7 @@ export default function MyWork() {
       </section>
 
       <Footer links={[
-        { label: "LinkedIn", href: "https://linkedin.com" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/gaganbnh/" },
         { label: "Medium", href: "https://medium.com/@ananidzezitze" },
         { label: "GitHub", href: "https://github.com/AnanidzeZitze?tab=repositories" },
         { label: "Tableau", href: "https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes" }

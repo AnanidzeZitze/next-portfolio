@@ -105,10 +105,10 @@ function Hero() {
         opacity: loaded ? heroOpacity : 0, transition: "opacity 1.2s ease 1.8s",
       }}>
         <div style={{ position: "relative" }}>
-          <div style={{ width: "320px", height: "420px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)" }}>
+          <div style={{ width: "380px", height: "500px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)" }}>
             <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=1067,fit=crop/kP0de2JiSFqeEpCY/img_0395-VnMPjZWGGJ2ZMv1S.png" alt="Gagan" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "contrast(1.05) saturate(0.9)" }} />
           </div>
-          <GlassPanel style={{ position: "absolute", bottom: "-24px", left: "-50px", padding: "16px 20px" }}>
+          <GlassPanel style={{ position: "absolute", bottom: "-30px", left: "-60px", padding: "18px 24px" }}>
             <div style={{ fontFamily: "var(--body)", fontSize: "9px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--saffron)", marginBottom: "4px" }}>Status</div>
             <div style={{ fontFamily: "var(--display)", fontSize: "16px", fontWeight: 600, color: "#fff" }}>Open to Opportunities</div>
           </GlassPanel>
@@ -517,7 +517,7 @@ export default function Apex() {
       <WorkPreview />
       <Contact />
       <Footer links={[
-        { label: "LinkedIn", href: "https://linkedin.com" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/gaganbnh/" },
         { label: "Medium", href: "https://medium.com/@ananidzezitze" },
         { label: "GitHub", href: "https://github.com/AnanidzeZitze?tab=repositories" },
         { label: "Tableau", href: "https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes" }
