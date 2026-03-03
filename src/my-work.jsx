@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 import { useScroll, useInView } from "./hooks/index.js";
-import { Preloader, MagneticCursor, GradientMesh, Reveal, Nav, Footer, GlobalStyles } from "./components/shared.jsx";
+import { Preloader, MagneticCursor, GradientMesh, Reveal, Nav, Footer, GlobalStyles, KolamMotif } from "./components/shared.jsx";
 
 // ═══ WORK DATA ═══
 const workItems = [
@@ -142,7 +142,7 @@ export default function MyWork() {
       {!loaded && <Preloader onComplete={onDone} />}
       {loaded && <MagneticCursor />}
       <GradientMesh />
-      <Nav 
+      <Nav
         links={[{ href: "/", label: "Home" }, { href: "/my-marketing-work", label: "Work", active: true }, { href: "/my-marketing-blog", label: "Blog" }]}
       />
 
@@ -178,8 +178,8 @@ export default function MyWork() {
                   boxShadow: isActive ? "0 0 25px rgba(218,165,32,0.15), 0 0 0 1px var(--saffron)" : "0 0 0 1px rgba(255,255,255,0.04)",
                   transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
                   transform: isActive ? "translateY(-2px)" : "none",
-                }} onMouseEnter={e => { if (!isActive) { e.currentTarget.style.boxShadow = "0 0 0 1px rgba(218,165,32,0.3)"; e.currentTarget.style.color = "var(--saffron)"; }}}
-                  onMouseLeave={e => { if (!isActive) { e.currentTarget.style.boxShadow = "0 0 0 1px rgba(255,255,255,0.04)"; e.currentTarget.style.color = "rgba(255,255,255,0.35)"; }}}>
+                }} onMouseEnter={e => { if (!isActive) { e.currentTarget.style.boxShadow = "0 0 0 1px rgba(218,165,32,0.3)"; e.currentTarget.style.color = "var(--saffron)"; } }}
+                  onMouseLeave={e => { if (!isActive) { e.currentTarget.style.boxShadow = "0 0 0 1px rgba(255,255,255,0.04)"; e.currentTarget.style.color = "rgba(255,255,255,0.35)"; } }}>
                   {c.label}<span style={{ marginLeft: "6px", opacity: 0.5, fontSize: "10px" }}>{count}</span>
                 </button>
               );
@@ -208,11 +208,11 @@ export default function MyWork() {
       </section>
 
       <Footer links={[
-          { label: "Home", href: "/" },
-          { label: "Blog", href: "/my-marketing-blog" },
-          { label: "Medium", href: "https://medium.com/@ananidzezitze" },
-          { label: "GitHub", href: "https://github.com/AnanidzeZitze?tab=repositories" }
-        ]} />
+        { label: "Home", href: "/" },
+        { label: "Blog", href: "/my-marketing-blog" },
+        { label: "Medium", href: "https://medium.com/@ananidzezitze" },
+        { label: "GitHub", href: "https://github.com/AnanidzeZitze?tab=repositories" }
+      ]} />
     </>
   );
 }
