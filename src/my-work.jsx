@@ -5,22 +5,21 @@ import { Preloader, MagneticCursor, GradientMesh, Reveal, Nav, Footer, GlobalSty
 
 // ═══ WORK DATA ═══
 const workItems = [
-  { id: 1, src: "https://www.canva.com/design/DAGLEsPv4ao/F_EulhoPHsraplU9TC8FtA/view?embed", pt: "128.5714%", cat: "brand", label: "Brand Identity System" },
-  { id: 2, src: "https://www.canva.com/design/DAHCAqMbZH4/ASpcxFtxqxEV3-Jz4b7h6w/view?embed", pt: "125%", cat: "brand", label: "Brand Guidelines" },
-  { id: 3, src: "https://www.canva.com/design/DAG5rS9JOEc/jJYYa0bVd9q8veEdt4TNLg/view?embed", pt: "56.25%", cat: "deck", label: "Strategy Deck" },
-  { id: 4, src: "https://www.canva.com/design/DAG7tCx9plQ/Bv7Kf1TlUJIt78FyGvizEg/watch?embed", pt: "50%", cat: "video", label: "Brand Video", isVideo: true },
-  { id: 5, src: "https://www.canva.com/design/DAGyU3P5J_Y/UuCAEVLag78R9YRwAgZ8Zg/view?embed", pt: "141.4286%", cat: "print", label: "Print Collateral" },
-  { id: 6, src: "https://www.canva.com/design/DAG0Qw4K2do/dSOZrmMNV2PqsghR83hQXQ/view?embed", pt: "141.4358%", cat: "print", label: "Marketing Flyer" },
+  { id: 2, src: "https://www.canva.com/design/DAHCAqMbZH4/ASpcxFtxqxEV3-Jz4b7h6w/view?embed", pt: "125%", cat: "brand", label: "Brand & Product Ad Posters" },
+  { id: 1, src: "https://www.canva.com/design/DAGLEsPv4ao/F_EulhoPHsraplU9TC8FtA/view?embed", pt: "128.5714%", cat: "brand", label: "T-Shirt Design" },
+  { id: 3, src: "https://www.canva.com/design/DAG5rS9JOEc/jJYYa0bVd9q8veEdt4TNLg/view?embed", pt: "56.25%", cat: "deck", label: "Youtube Banner Design" },
+  { id: 4, src: "https://www.canva.com/design/DAG7tCx9plQ/Bv7Kf1TlUJIt78FyGvizEg/watch?embed", pt: "50%", cat: "print", label: "Christmas Letters", isVideo: true },
+  { id: 5, src: "https://www.canva.com/design/DAGyU3P5J_Y/UuCAEVLag78R9YRwAgZ8Zg/view?embed", pt: "141.4286%", cat: "print", label: "Thank You Letters" },
+  { id: 6, src: "https://www.canva.com/design/DAG0Qw4K2do/dSOZrmMNV2PqsghR83hQXQ/view?embed", pt: "141.4358%", cat: "print", label: "Newsletter & Marketing Flyer" },
   { id: 7, src: "https://www.canva.com/design/DAFZH7_qfpg/6woZaYRzBsp03QqtuLaflw/view?embed", pt: "100%", cat: "social", label: "Social Campaign" },
-  { id: 8, src: "https://www.canva.com/design/DAG5MO6tClY/_5gbpEhg8KHwmp4cd_xpfA/view?embed", pt: "100%", cat: "social", label: "Social Post Series" },
-  { id: 9, src: "https://www.canva.com/design/DAG4bnevDMU/MZBB5xmIaMafGXcRbyPfAg/view?embed", pt: "141.4286%", cat: "print", label: "Event Poster" },
-  { id: 10, src: "https://www.canva.com/design/DAG-KUs2YxI/Og5LB8SA4VUPnMRgYuFFag/view?embed", pt: "140.9524%", cat: "print", label: "Info Brochure" },
-  { id: 11, src: "https://www.canva.com/design/DAGqF1Fb9Ts/1kmsTMnlZS9hUtgKiWgDPw/watch?embed", pt: "100%", cat: "video", label: "Motion Graphics", isVideo: true },
-  { id: 12, src: "https://www.canva.com/design/DAG-PMZnCuE/6G9WQmTXYnQTYI2rUCT_Zw/view?embed", pt: "140%", cat: "campaign", label: "Campaign Design" },
+  { id: 8, src: "https://www.canva.com/design/DAG5MO6tClY/_5gbpEhg8KHwmp4cd_xpfA/view?embed", pt: "100%", cat: "social", label: "Brand Design" },
+  { id: 9, src: "https://www.canva.com/design/DAG4bnevDMU/MZBB5xmIaMafGXcRbyPfAg/view?embed", pt: "141.4286%", cat: "print", label: "Thank You Letter" },
+  { id: 10, src: "https://www.canva.com/design/DAG-KUs2YxI/Og5LB8SA4VUPnMRgYuFFag/view?embed", pt: "140.9524%", cat: "print", label: "Forum Invite" },
+  { id: 11, src: "https://www.canva.com/design/DAGqF1Fb9Ts/1kmsTMnlZS9hUtgKiWgDPw/watch?embed", pt: "100%", cat: "video", label: "Promo Video", isVideo: true },
+  { id: 12, src: "https://www.canva.com/design/DAG-PMZnCuE/6G9WQmTXYnQTYI2rUCT_Zw/view?embed", pt: "140%", cat: "campaign", label: "Forum Invites" },
   { id: 13, src: "https://www.canva.com/design/DAG0Q3cGQ4k/HRU2RsddslTSAB872PIjuA/view?embed", pt: "12.3626%", cat: "campaign", label: "Ad Banner Set" },
-  { id: 14, src: "https://www.canva.com/design/DAG6Y11qJtE/-WIOJ8XRVWCfeHXg-O2PrQ/view?embed", pt: "133.3333%", cat: "brand", label: "Logo & Identity" },
-  { id: 15, src: "https://www.canva.com/design/DAG0U77Mu9w/QFf4PukDdkPyfJvq4qGXeQ/view?embed", pt: "125%", cat: "brand", label: "Style Guide" },
-  { id: 16, src: "https://www.canva.com/design/DAHCAqMbZH4/ASpcxFtxqxEV3-Jz4b7h6w/view?embed", pt: "125%", cat: "brand", label: "Brand Refresh" },
+  { id: 14, src: "https://www.canva.com/design/DAG6Y11qJtE/-WIOJ8XRVWCfeHXg-O2PrQ/view?embed", pt: "133.3333%", cat: "brand", label: "Christmas Letter & Forum Invite" },
+  { id: 15, src: "https://www.canva.com/design/DAG0U77Mu9w/QFf4PukDdkPyfJvq4qGXeQ/view?embed", pt: "125%", cat: "brand", label: "Product Ad Posters" },
 ];
 
 const cats = [
