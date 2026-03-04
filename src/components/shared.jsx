@@ -286,7 +286,7 @@ export function KolamMotif({ size = 200, color = "var(--saffron)", opacity = 0.1
     const [ref, inView] = useInView(0.3);
     const dashProgress = animate && inView ? 0 : 1;
     return (
-        <svg ref={ref} width={size} height={size} viewBox="0 0 200 200" style={{ ...style, opacity }} fill="none" stroke={color} strokeWidth="0.8">
+        <svg ref={ref} width={size} height={size} viewBox="0 0 200 200" style={{ ...style, opacity, pointerEvents: "none" }} fill="none" stroke={color} strokeWidth="0.8">
             <circle cx="100" cy="100" r="90" strokeDasharray="565" strokeDashoffset={565 * dashProgress} style={{ transition: "stroke-dashoffset 2s cubic-bezier(0.16,1,0.3,1)" }} />
             <circle cx="100" cy="100" r="70" strokeDasharray="440" strokeDashoffset={440 * dashProgress} style={{ transition: "stroke-dashoffset 2s cubic-bezier(0.16,1,0.3,1) 0.2s" }} />
             <circle cx="100" cy="100" r="50" strokeDasharray="314" strokeDashoffset={314 * dashProgress} style={{ transition: "stroke-dashoffset 2s cubic-bezier(0.16,1,0.3,1) 0.4s" }} />
