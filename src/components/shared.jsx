@@ -152,7 +152,7 @@ export function MagneticCursor() {
                 clipPath: hovering ? "polygon(0 0, 100% 0, 100% 100%, 0 100%)" : "polygon(25% 0, 75% 0, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0 75%, 0 25%)",
                 WebkitClipPath: hovering ? "polygon(0 0, 100% 0, 100% 100%, 0 100%)" : "polygon(25% 0, 75% 0, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0 75%, 0 25%)",
                 transform: `translate(-50%, -50%) rotate(45deg) scale(${clicking ? 0.8 : 1})`,
-                transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+                transition: "width 0.3s cubic-bezier(0.16,1,0.3,1), height 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s cubic-bezier(0.16,1,0.3,1), clip-path 0.3s cubic-bezier(0.16,1,0.3,1), -webkit-clip-path 0.3s cubic-bezier(0.16,1,0.3,1), transform 0.3s cubic-bezier(0.16,1,0.3,1)",
                 mixBlendMode: "difference",
             }} />
             <div style={{
@@ -161,7 +161,7 @@ export function MagneticCursor() {
                 background: "var(--saffron)",
                 left: pos.x, top: pos.y,
                 transform: "translate(-50%, -50%) rotate(45deg)",
-                transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+                transition: "width 0.3s cubic-bezier(0.16,1,0.3,1), height 0.3s cubic-bezier(0.16,1,0.3,1)",
             }} />
         </>
     );
