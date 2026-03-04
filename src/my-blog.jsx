@@ -207,7 +207,17 @@ export default function MyBlog() {
             )}
 
             {/* RSS Widget (Dynamic Height - Wall Grid) */}
-            <div style={{ width: "100%", background: "var(--bg)", display: feedLoaded ? "block" : "none", pointerEvents: "auto", position: "relative", zIndex: 15 }}>
+            <div style={{
+              width: "100%",
+              background: "var(--bg)",
+              opacity: feedLoaded ? 1 : 0,
+              height: feedLoaded ? "auto" : "0",
+              overflow: feedLoaded ? "visible" : "hidden",
+              pointerEvents: feedLoaded ? "auto" : "none",
+              position: "relative",
+              zIndex: 15,
+              transition: "opacity 0.5s ease"
+            }}>
               <rssapp-wall id="Am3kjPWYpKWqVRPv"></rssapp-wall>
             </div>
           </div>
