@@ -15,7 +15,7 @@ export function GlobalStyles() {
       ::selection { background: var(--saffron); color: var(--bg); }
       ::-webkit-scrollbar { width: 4px; }
       ::-webkit-scrollbar-track { background: var(--bg); }
-      ::-webkit-scrollbar-thumb { background: rgba(218,165,32,0.15); border-radius: 2px; }
+      ::-webkit-scrollbar-thumb { background: rgba(218,165,32,0.3); border-radius: 2px; }
 
       @keyframes floatOrb1 { 0%,100% { transform: translate(0,0); } 33% { transform: translate(30px,-40px); } 66% { transform: translate(-20px,30px); } }
       @keyframes floatOrb2 { 0%,100% { transform: translate(0,0); } 33% { transform: translate(-40px,20px); } 66% { transform: translate(20px,-30px); } }
@@ -105,10 +105,10 @@ export function Preloader({ onComplete, title = "Gagan", dotColor = "var(--saffr
             <div style={{ fontFamily: "var(--display)", fontSize: "24px", color: "#fff", marginBottom: "24px", letterSpacing: "-0.5px" }}>
                 {title}<span style={{ color: dotColor }}>.</span>
             </div>
-            <div style={{ width: "180px", height: "1px", background: "rgba(255,255,255,0.06)" }}>
+            <div style={{ width: "180px", height: "1px", background: "rgba(255,255,255,0.15)" }}>
                 <div style={{ width: `${progress}%`, height: "100%", background: "var(--saffron)", transition: "width 0.2s" }} />
             </div>
-            <div style={{ fontFamily: "var(--body)", fontSize: "10px", color: "rgba(255,255,255,0.2)", marginTop: "12px", letterSpacing: "3px" }}>
+            <div style={{ fontFamily: "var(--body)", fontSize: "10px", color: "rgba(255,255,255,0.4)", marginTop: "12px", letterSpacing: "3px" }}>
                 {Math.round(progress)}%
             </div>
         </div>
@@ -147,7 +147,7 @@ export function MagneticCursor() {
             <div className="cursor-outer" style={{
                 position: "fixed", zIndex: 99998, pointerEvents: "none",
                 width: hovering ? "34px" : "28px", height: hovering ? "34px" : "28px",
-                border: `1.5px solid ${hovering ? "var(--saffron)" : "rgba(255,255,255,0.4)"}`,
+                border: `1.5px solid ${hovering ? "var(--saffron)" : "rgba(255,255,255,0.65)"}`,
                 left: pos.x, top: pos.y,
                 clipPath: hovering ? "polygon(0 0, 100% 0, 100% 100%, 0 100%)" : "polygon(25% 0, 75% 0, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0 75%, 0 25%)",
                 WebkitClipPath: hovering ? "polygon(0 0, 100% 0, 100% 100%, 0 100%)" : "polygon(25% 0, 75% 0, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0 75%, 0 25%)",
@@ -245,8 +245,8 @@ export function TiltCard({ children, style = {}, glowColor = "var(--saffron)" })
                 perspective: "800px", cursor: "pointer", position: "relative", overflow: "hidden",
                 transform: `perspective(800px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg) ${hovering ? "translateY(-6px)" : ""}`,
                 transition: hovering ? "transform 0.1s ease" : "transform 0.5s cubic-bezier(0.16,1,0.3,1)",
-                boxShadow: hovering ? `0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px ${glowColor}33, inset 0 0 30px ${glowColor}08` : "0 0 0 1px rgba(255,255,255,0.04)",
-                background: "rgba(255,255,255,0.015)",
+                boxShadow: hovering ? `0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px ${glowColor}55, inset 0 0 30px ${glowColor}15` : "0 0 0 1px rgba(255,255,255,0.12)",
+                background: "rgba(255,255,255,0.03)",
                 ...style,
             }}>
             {hovering && (
@@ -275,14 +275,14 @@ export function GlassPanel({ children, style = {} }) {
         <div style={{
             background: "rgba(12,10,8,0.6)",
             backdropFilter: "blur(20px) saturate(150%)",
-            border: `1px solid rgba(255,255,255,0.06)`,
+            border: `1px solid rgba(255,255,255,0.15)`,
             boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
             ...style,
         }}>{children}</div>
     );
 }
 
-export function KolamMotif({ size = 200, color = "var(--saffron)", opacity = 0.06, style = {}, animate = false }) {
+export function KolamMotif({ size = 200, color = "var(--saffron)", opacity = 0.12, style = {}, animate = false }) {
     const [ref, inView] = useInView(0.3);
     const dashProgress = animate && inView ? 0 : 1;
     return (
@@ -298,7 +298,7 @@ export function KolamMotif({ size = 200, color = "var(--saffron)", opacity = 0.0
 }
 
 export function Skeleton({ height = "300px" }) {
-    return <div style={{ width: "100%", height, background: "linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.02) 75%)", backgroundSize: "200% 100%", animation: "shimmer 1.5s infinite" }} />;
+    return <div style={{ width: "100%", height, background: "linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.05) 75%)", backgroundSize: "200% 100%", animation: "shimmer 1.5s infinite" }} />;
 }
 
 export function Nav({ links = [], pages = [] }) {
@@ -332,24 +332,24 @@ export function Nav({ links = [], pages = [] }) {
                             border: l.active ? "1px solid var(--saffron)" : "none",
                             fontFamily: "var(--body)", fontSize: "11px", fontWeight: 600,
                             letterSpacing: "2px", textTransform: "uppercase", textDecoration: "none",
-                            color: l.active ? "var(--saffron)" : "rgba(255,255,255,0.4)",
+                            color: l.active ? "var(--saffron)" : "rgba(255,255,255,0.65)",
                             transition: "all 0.3s",
                             boxShadow: l.active ? "0 0 15px rgba(218,165,32,0.1)" : "none"
                         }}
                         onMouseEnter={e => { if (!l.active) e.target.style.color = "var(--saffron)"; }}
-                        onMouseLeave={e => { if (!l.active) e.target.style.color = "rgba(255,255,255,0.4)"; }}>
+                        onMouseLeave={e => { if (!l.active) e.target.style.color = "rgba(255,255,255,0.65)"; }}>
                         {l.label}
                     </a>
                 ))}
-                {pages && pages.length > 0 && <span style={{ width: "1px", height: "16px", background: "rgba(255,255,255,0.08)", margin: "0 8px" }} />}
+                {pages && pages.length > 0 && <span style={{ width: "1px", height: "16px", background: "rgba(255,255,255,0.2)", margin: "0 8px" }} />}
                 {pages && pages.map(l => (
                     <a key={l.label} href={l.href} data-magnetic
                         style={{
                             padding: l.active ? "7px 18px" : "7px 18px",
-                            border: l.active ? "1px solid var(--saffron)" : "1px solid rgba(255,255,255,0.08)",
+                            border: l.active ? "1px solid var(--saffron)" : "1px solid rgba(255,255,255,0.2)",
                             fontFamily: "var(--body)", fontSize: "11px", fontWeight: 600,
                             letterSpacing: "2px", textTransform: "uppercase", textDecoration: "none",
-                            color: l.active ? "var(--saffron)" : "rgba(255,255,255,0.5)",
+                            color: l.active ? "var(--saffron)" : "rgba(255,255,255,0.7)",
                             transition: "all 0.3s",
                             boxShadow: l.active ? "0 0 20px rgba(218,165,32,0.1)" : "none"
                         }}
@@ -362,8 +362,8 @@ export function Nav({ links = [], pages = [] }) {
                         }}
                         onMouseLeave={e => {
                             if (!l.active) {
-                                e.target.style.borderColor = "rgba(255,255,255,0.08)";
-                                e.target.style.color = "rgba(255,255,255,0.5)";
+                                e.target.style.borderColor = "rgba(255,255,255,0.2)";
+                                e.target.style.color = "rgba(255,255,255,0.7)";
                                 e.target.style.boxShadow = "none";
                             }
                         }}>
@@ -384,12 +384,12 @@ export function Nav({ links = [], pages = [] }) {
 export function Footer({ links }) {
     return (
         <footer style={{ padding: "28px var(--px)", borderTop: "1px solid rgba(255,255,255,0.04)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
-            <span style={{ fontFamily: "var(--body)", fontSize: "11px", color: "rgba(255,255,255,0.12)" }}>© 2026 Gagan Bhaskar Naik</span>
+            <span style={{ fontFamily: "var(--body)", fontSize: "11px", color: "rgba(255,255,255,0.3)" }}>© 2026 Gagan Bhaskar Naik</span>
             <div style={{ display: "flex", gap: "20px" }}>
                 {links.map((l, i) => (
                     <a key={i} href={l.href} target={l.href.startsWith("/") || l.href.startsWith("mailto") ? undefined : "_blank"} rel="noopener noreferrer"
-                        style={{ fontFamily: "var(--body)", fontSize: "11px", color: "rgba(255,255,255,0.15)", textDecoration: "none", transition: "color 0.3s" }}
-                        onMouseEnter={e => e.target.style.color = "var(--saffron)"} onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.15)"}>{l.label}</a>
+                        style={{ fontFamily: "var(--body)", fontSize: "11px", color: "rgba(255,255,255,0.4)", textDecoration: "none", transition: "color 0.3s" }}
+                        onMouseEnter={e => e.target.style.color = "var(--saffron)"} onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.4)"}>{l.label}</a>
                 ))}
             </div>
         </footer>

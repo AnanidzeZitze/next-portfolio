@@ -80,7 +80,7 @@ export default function MyBlog() {
           </h1>
 
           <p style={{
-            fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.4)",
+            fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.75)",
             maxWidth: "520px",
             opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(20px)",
             transition: "all 0.8s 0.9s",
@@ -99,8 +99,8 @@ export default function MyBlog() {
                 fontFamily: "var(--body)", fontSize: "11px", fontWeight: 600,
                 letterSpacing: "1px", textTransform: "uppercase",
                 padding: "8px 16px",
-                border: `1px solid rgba(255,255,255,0.05)`,
-                color: "rgba(255,255,255,0.35)",
+                border: `1px solid rgba(255,255,255,0.15)`,
+                color: "rgba(255,255,255,0.6)",
                 transition: "all 0.4s ease",
                 cursor: "default",
               }}
@@ -110,8 +110,8 @@ export default function MyBlog() {
                   e.target.style.boxShadow = `0 0 20px ${t.accent === "var(--saffron)" ? "rgba(218,165,32,0.1)" : t.accent === "var(--steel)" ? "rgba(218,165,32,0.1)" : "rgba(184,212,53,0.1)"}`;
                 }}
                 onMouseLeave={e => {
-                  e.target.style.borderColor = "rgba(255,255,255,0.05)";
-                  e.target.style.color = "rgba(255,255,255,0.35)";
+                  e.target.style.borderColor = "rgba(255,255,255,0.15)";
+                  e.target.style.color = "rgba(255,255,255,0.6)";
                   e.target.style.boxShadow = "none";
                 }}>
                 {t.label}
@@ -124,9 +124,9 @@ export default function MyBlog() {
       {/* ═══ DIVIDER — self-drawing ═══ */}
       <Reveal>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", padding: "0 var(--px)", marginBottom: "48px" }}>
-          <div style={{ flex: 1, height: "1px", background: "linear-gradient(90deg, transparent, rgba(218,165,32,0.12), transparent)" }} />
-          <svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,0 12,6 6,12 0,6" fill="var(--saffron)" opacity="0.25" /></svg>
-          <div style={{ flex: 1, height: "1px", background: "linear-gradient(90deg, transparent, rgba(218,165,32,0.12), transparent)" }} />
+          <div style={{ flex: 1, height: "1px", background: "linear-gradient(90deg, transparent, rgba(218,165,32,0.3), transparent)" }} />
+          <svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,0 12,6 6,12 0,6" fill="var(--saffron)" opacity="0.5" /></svg>
+          <div style={{ flex: 1, height: "1px", background: "linear-gradient(90deg, transparent, rgba(218,165,32,0.3), transparent)" }} />
         </div>
       </Reveal>
 
@@ -137,15 +137,15 @@ export default function MyBlog() {
             maxWidth: "1000px", margin: "0 auto", overflow: "hidden",
             background: "rgba(12,10,8,0.5)",
             backdropFilter: "blur(16px) saturate(140%)",
-            border: "1px solid rgba(255,255,255,0.04)",
+            border: "1px solid rgba(255,255,255,0.15)",
             boxShadow: "0 10px 40px rgba(0,0,0,0.25)",
           }}>
             {/* Header — glassmorphism bar */}
             <div style={{
               padding: "16px 24px",
-              borderBottom: "1px solid rgba(255,255,255,0.04)",
+              borderBottom: "1px solid rgba(255,255,255,0.15)",
               display: "flex", justifyContent: "space-between", alignItems: "center",
-              background: "rgba(255,255,255,0.01)",
+              background: "rgba(255,255,255,0.05)",
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 <svg width="20" height="20" viewBox="0 0 20 20">
@@ -154,12 +154,12 @@ export default function MyBlog() {
                 </svg>
                 <div>
                   <div style={{ fontFamily: "var(--display)", fontSize: "14px", fontWeight: 600, color: "#fff" }}>Latest Articles</div>
-                  <div style={{ fontFamily: "var(--body)", fontSize: "9px", color: "rgba(255,255,255,0.25)", letterSpacing: "2px", textTransform: "uppercase" }}>From Medium</div>
+                  <div style={{ fontFamily: "var(--body)", fontSize: "9px", color: "rgba(255,255,255,0.5)", letterSpacing: "2px", textTransform: "uppercase" }}>From Medium</div>
                 </div>
               </div>
               <div style={{
                 padding: "4px 12px",
-                border: "1px solid rgba(218,165,32,0.2)",
+                border: "1px solid rgba(218,165,32,0.4)",
                 fontFamily: "var(--body)", fontSize: "9px", fontWeight: 700,
                 color: "var(--saffron)", letterSpacing: "2px", textTransform: "uppercase",
                 boxShadow: "0 0 10px rgba(218,165,32,0.06)",
@@ -212,7 +212,7 @@ export default function MyBlog() {
             <TiltCard glowColor="var(--saffron)" style={{ padding: "44px 36px" }}>
               <div style={{ width: "32px", height: "3px", background: "var(--saffron)", marginBottom: "24px" }} />
               <div style={{ fontFamily: "var(--display)", fontSize: "22px", fontWeight: 600, color: "#fff", margin: "0 0 10px" }}>Have a topic in mind?</div>
-              <p style={{ fontFamily: "var(--body)", fontSize: "14px", lineHeight: 1.7, color: "rgba(255,255,255,0.35)", margin: "0 0 24px" }}>
+              <p style={{ fontFamily: "var(--body)", fontSize: "14px", lineHeight: 1.7, color: "rgba(255,255,255,0.7)", margin: "0 0 24px" }}>
                 I'm open to guest posts, collaborations, and content partnerships on marketing, data, and growth.
               </p>
               <a href="mailto:gagan.97@gmail.com" data-magnetic style={{
@@ -228,7 +228,7 @@ export default function MyBlog() {
             <TiltCard glowColor="var(--saffron)" style={{ padding: "44px 36px" }}>
               <div style={{ width: "32px", height: "3px", background: "var(--saffron)", marginBottom: "24px" }} />
               <div style={{ fontFamily: "var(--display)", fontSize: "22px", fontWeight: 600, color: "#fff", margin: "0 0 10px" }}>See my design work</div>
-              <p style={{ fontFamily: "var(--body)", fontSize: "14px", lineHeight: 1.7, color: "rgba(255,255,255,0.35)", margin: "0 0 24px" }}>
+              <p style={{ fontFamily: "var(--body)", fontSize: "14px", lineHeight: 1.7, color: "rgba(255,255,255,0.7)", margin: "0 0 24px" }}>
                 Campaign assets, brand systems, presentations, video — the visual arsenal of a strategic mind.
               </p>
               <a href="/my-marketing-work" data-magnetic style={{

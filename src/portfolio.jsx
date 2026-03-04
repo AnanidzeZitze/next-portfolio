@@ -38,7 +38,7 @@ function Hero() {
         {/* Cultural flags */}
         <div style={{ opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(20px)", transition: "all 0.8s ease 0.3s", display: "flex", gap: "20px", marginBottom: "32px", flexWrap: "wrap" }}>
           {[{ flag: "🇩🇪", label: "Built in Germany" }, { flag: "🇮🇳", label: "Forged in India" }, { flag: "🇺🇸", label: "Sharpened in America" }].map((item, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", fontFamily: "var(--body)", fontSize: "11px", fontWeight: 500, letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", fontFamily: "var(--body)", fontSize: "11px", fontWeight: 500, letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>
               <span style={{ fontSize: "14px" }}>{item.flag}</span> {item.label}
             </div>
           ))}
@@ -75,7 +75,7 @@ function Hero() {
           opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(30px)",
           transition: "all 0.9s cubic-bezier(0.16,1,0.3,1) 1.4s",
           fontFamily: "var(--body)", fontSize: "clamp(14px, 1.8vw, 18px)", fontWeight: 400,
-          color: "rgba(255,255,255,0.4)", maxWidth: "540px", lineHeight: 1.8, margin: "20px 0 44px",
+          color: "rgba(255,255,255,0.75)", maxWidth: "540px", lineHeight: 1.8, margin: "20px 0 44px",
         }}>
           Growth strategist. Marketing analytician. Data-driven storyteller.
           <br />I don't just read the market — <span style={{ color: "var(--saffron)", fontWeight: 600 }}>I move it</span>.
@@ -90,8 +90,8 @@ function Hero() {
             transition: "all 0.4s", boxShadow: "0 0 30px rgba(218,165,32,0.15)",
           }}>Explore My Work</a>
           <a href="#contact" data-magnetic style={{
-            padding: "14px 36px", background: "transparent", border: "1px solid rgba(255,255,255,0.1)",
-            color: "rgba(255,255,255,0.6)", textDecoration: "none",
+            padding: "14px 36px", background: "transparent", border: "1px solid rgba(255,255,255,0.25)",
+            color: "rgba(255,255,255,0.9)", textDecoration: "none",
             fontFamily: "var(--body)", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
             transition: "all 0.4s",
           }}>Contact</a>
@@ -105,7 +105,7 @@ function Hero() {
         opacity: loaded ? heroOpacity : 0, transition: "opacity 1.2s ease 1.8s",
       }}>
         <div style={{ position: "relative" }}>
-          <div style={{ width: "380px", height: "500px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)" }}>
+          <div style={{ width: "380px", height: "500px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.15)" }}>
             <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=1067,fit=crop/kP0de2JiSFqeEpCY/img_0395-VnMPjZWGGJ2ZMv1S.png" alt="Gagan" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "contrast(1.05) saturate(0.9)" }} />
           </div>
           <GlassPanel style={{ position: "absolute", bottom: "-30px", left: "-60px", padding: "18px 24px" }}>
@@ -117,7 +117,7 @@ function Hero() {
 
       {/* Scroll indicator */}
       <div style={{ position: "absolute", bottom: "32px", left: "50%", transform: "translateX(-50%)", opacity: loaded ? 0.4 : 0, transition: "opacity 1s 2.5s", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-        <div style={{ width: "20px", height: "32px", borderRadius: "10px", border: "1px solid rgba(255,255,255,0.15)", display: "flex", justifyContent: "center", paddingTop: "6px" }}>
+        <div style={{ width: "20px", height: "32px", borderRadius: "10px", border: "1px solid rgba(255,255,255,0.3)", display: "flex", justifyContent: "center", paddingTop: "6px" }}>
           <div className="scroll-dot" style={{ width: "2px", height: "6px", borderRadius: "1px", background: "var(--saffron)" }} />
         </div>
       </div>
@@ -149,13 +149,13 @@ function StatsBar() {
   ];
   return (
     <Reveal>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderTop: "1px solid rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.04)" }} className="stats-grid">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderTop: "1px solid rgba(255,255,255,0.15)", borderBottom: "1px solid rgba(255,255,255,0.15)" }} className="stats-grid">
         {stats.map((s, i) => (
-          <div key={i} style={{ padding: "36px var(--px)", borderRight: i < 3 ? "1px solid rgba(255,255,255,0.04)" : "none", textAlign: "center" }}>
+          <div key={i} style={{ padding: "36px var(--px)", borderRight: i < 3 ? "1px solid rgba(255,255,255,0.15)" : "none", textAlign: "center" }}>
             <div style={{ fontFamily: "var(--display)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 600, color: s.accent, letterSpacing: "-1px" }}>
               {s.prefix || ""}<Counter end={s.value} suffix={s.suffix} />
             </div>
-            <div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginTop: "8px" }}>{s.label}</div>
+            <div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginTop: "8px" }}>{s.label}</div>
           </div>
         ))}
       </div>
@@ -179,17 +179,17 @@ function About() {
         </Reveal>
         <Reveal delay={0.15}>
           <div>
-            <p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.85, color: "rgba(255,255,255,0.5)", margin: "0 0 24px" }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.85, color: "rgba(255,255,255,0.8)", margin: "0 0 24px" }}>
               I'm a data-driven marketer who operates at the intersection of growth strategy, analytics, and finance. I don't just look at numbers — I decode the <em style={{ color: "var(--saffron)", fontStyle: "italic" }}>why</em> behind human behavior, then architect systems that turn those insights into scalable growth.
             </p>
-            <p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.85, color: "rgba(255,255,255,0.5)", margin: "0 0 32px" }}>
+            <p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.85, color: "rgba(255,255,255,0.8)", margin: "0 0 32px" }}>
               My perspective is shaped by three cultures: German engineering precision, Indian entrepreneurial intensity, and American tech-forward ambition. That global lens is my competitive advantage.
             </p>
             <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
               {["Growth Strategy", "Marketing Analytics", "AI-Driven Marketing", "Data Storytelling"].map((tag, i) => (
-                <span key={i} style={{ fontFamily: "var(--body)", fontSize: "11px", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", padding: "8px 16px", border: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.4)", transition: "all 0.3s" }}
+                <span key={i} style={{ fontFamily: "var(--body)", fontSize: "11px", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", padding: "8px 16px", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)", transition: "all 0.3s" }}
                   onMouseEnter={e => { e.target.style.borderColor = "var(--saffron)"; e.target.style.color = "var(--saffron)"; e.target.style.boxShadow = "0 0 15px rgba(218,165,32,0.08)"; }}
-                  onMouseLeave={e => { e.target.style.borderColor = "rgba(255,255,255,0.06)"; e.target.style.color = "rgba(255,255,255,0.4)"; e.target.style.boxShadow = "none"; }}>{tag}</span>
+                  onMouseLeave={e => { e.target.style.borderColor = "rgba(255,255,255,0.15)"; e.target.style.color = "rgba(255,255,255,0.7)"; e.target.style.boxShadow = "none"; }}>{tag}</span>
               ))}
             </div>
           </div>
@@ -232,7 +232,7 @@ function Experience() {
 
           {/* LEFT — Role selector cards */}
           <div style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
-            <div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "16px", marginTop: "12px" }}>Professional Experience</div>
+            <div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "16px", marginTop: "12px" }}>Professional Experience</div>
             {roles.map((r, i) => {
               const isActive = activeRole === i;
               return (
@@ -240,18 +240,18 @@ function Experience() {
                   <div data-magnetic onClick={() => setActiveRole(i)}
                     style={{
                       padding: "20px 24px", cursor: "pointer", position: "relative", overflow: "hidden",
-                      background: isActive ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.01)",
+                      background: isActive ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.03)",
                       borderLeft: isActive ? `3px solid ${r.accent}` : "3px solid transparent",
-                      boxShadow: isActive ? `0 0 0 1px ${r.accent}22, 0 0 30px ${r.accent}08` : "0 0 0 1px rgba(255,255,255,0.04)",
+                      boxShadow: isActive ? `0 0 0 1px ${r.accent}22, 0 0 30px ${r.accent}08` : "0 0 0 1px rgba(255,255,255,0.12)",
                       transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
                       transform: isActive ? "translateX(4px)" : "none",
                     }}
-                    onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = "rgba(255,255,255,0.02)"; e.currentTarget.style.boxShadow = `0 0 0 1px rgba(255,255,255,0.08)`; } }}
-                    onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = "rgba(255,255,255,0.01)"; e.currentTarget.style.boxShadow = "0 0 0 1px rgba(255,255,255,0.04)"; } }}>
-                    <div style={{ fontFamily: "var(--display)", fontSize: "16px", fontWeight: 600, color: isActive ? "#fff" : "rgba(255,255,255,0.5)", transition: "color 0.3s", marginBottom: "3px" }}>
+                    onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.boxShadow = `0 0 0 1px rgba(255,255,255,0.15)`; } }}
+                    onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = "rgba(255,255,255,0.03)"; e.currentTarget.style.boxShadow = "0 0 0 1px rgba(255,255,255,0.12)"; } }}>
+                    <div style={{ fontFamily: "var(--display)", fontSize: "16px", fontWeight: 600, color: isActive ? "#fff" : "rgba(255,255,255,0.7)", transition: "color 0.3s", marginBottom: "3px" }}>
                       {r.title}
                     </div>
-                    <div style={{ fontFamily: "var(--body)", fontSize: "12px", color: isActive ? r.accent : "rgba(255,255,255,0.25)", transition: "color 0.3s", display: "flex", alignItems: "center", gap: "6px" }}>
+                    <div style={{ fontFamily: "var(--body)", fontSize: "12px", color: isActive ? r.accent : "rgba(255,255,255,0.5)", transition: "color 0.3s", display: "flex", alignItems: "center", gap: "6px" }}>
                       <span>{r.flag}</span> {r.company}
                     </div>
                     {/* Active indicator dot */}
@@ -281,7 +281,7 @@ function Experience() {
                 <div style={{ fontFamily: "var(--display)", fontSize: "24px", fontWeight: 600, color: "#fff", lineHeight: 1.2, marginBottom: "4px" }}>
                   {active.title}
                 </div>
-                <div style={{ fontFamily: "var(--body)", fontSize: "14px", color: "rgba(255,255,255,0.35)", display: "flex", alignItems: "center", gap: "8px" }}>
+                <div style={{ fontFamily: "var(--body)", fontSize: "14px", color: "rgba(255,255,255,0.7)", display: "flex", alignItems: "center", gap: "8px" }}>
                   <span style={{ fontSize: "16px" }}>{active.flag}</span> {active.company} · {active.loc}
                 </div>
               </div>
@@ -291,11 +291,11 @@ function Experience() {
             <div style={{ height: "1px", background: `linear-gradient(90deg, ${active.accent}33, transparent)`, marginBottom: "24px" }} />
 
             {/* Accomplishments */}
-            <div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "16px" }}>Key Accomplishments</div>
+            <div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "16px" }}>Key Accomplishments</div>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "28px" }}>
               {active.highlights.map((h, j) => (
                 <div key={j} style={{
-                  fontFamily: "var(--body)", fontSize: "14px", lineHeight: 1.7, color: "rgba(255,255,255,0.5)",
+                  fontFamily: "var(--body)", fontSize: "14px", lineHeight: 1.7, color: "rgba(255,255,255,0.8)",
                   paddingLeft: "20px", position: "relative",
                   animation: `detailItemIn 0.4s cubic-bezier(0.16,1,0.3,1) ${j * 0.08}s both`,
                 }}>
@@ -306,7 +306,7 @@ function Experience() {
             </div>
 
             {/* Tools used */}
-            <div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "12px" }}>Tools & Stack</div>
+            <div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "12px" }}>Tools & Stack</div>
             <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
               {active.tools.map((tool, j) => (
                 <span key={j} style={{
@@ -323,14 +323,14 @@ function Experience() {
         {/* Education */}
         <Reveal delay={0.2}>
           <div style={{ marginTop: "48px" }}>
-            <div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "16px" }}>Education</div>
+            <div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "16px" }}>Education</div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3px" }} className="edu-grid">
               {education.map((ed, i) => (
                 <TiltCard key={i} glowColor={ed.accent} style={{ padding: "28px 32px" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                     <div>
                       <div style={{ fontFamily: "var(--display)", fontSize: "16px", fontWeight: 600, color: "#fff", marginBottom: "6px", lineHeight: 1.3 }}>{ed.degree}</div>
-                      <div style={{ fontFamily: "var(--body)", fontSize: "13px", color: "rgba(255,255,255,0.3)", display: "flex", alignItems: "center", gap: "6px" }}><span>{ed.flag}</span> {ed.school}, {ed.loc}</div>
+                      <div style={{ fontFamily: "var(--body)", fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", gap: "6px" }}><span>{ed.flag}</span> {ed.school}, {ed.loc}</div>
                     </div>
                     <div style={{ fontFamily: "var(--display)", fontSize: "28px", fontWeight: 600, color: ed.accent, opacity: 0.85, textShadow: `0 0 20px ${ed.accent}44` }}>{ed.gpa}</div>
                   </div>
@@ -388,10 +388,10 @@ function Skills() {
                   {[...row.items, ...row.items, ...row.items].map((item, j) => (
                     <div key={j} data-magnetic style={{
                       padding: "14px 28px", whiteSpace: "nowrap",
-                      background: "rgba(255,255,255,0.015)",
-                      border: "1px solid rgba(255,255,255,0.04)",
+                      background: "rgba(255,255,255,0.04)",
+                      border: "1px solid rgba(255,255,255,0.15)",
                       fontFamily: "var(--body)", fontSize: "13px", fontWeight: 500,
-                      color: "rgba(255,255,255,0.4)",
+                      color: "rgba(255,255,255,0.75)",
                       transition: "all 0.4s ease",
                       flexShrink: 0,
                     }}
@@ -404,9 +404,9 @@ function Skills() {
                         e.target.closest('.marquee-track').style.animationPlayState = 'paused';
                       }}
                       onMouseLeave={e => {
-                        e.target.style.borderColor = "rgba(255,255,255,0.04)";
-                        e.target.style.color = "rgba(255,255,255,0.4)";
-                        e.target.style.background = "rgba(255,255,255,0.015)";
+                        e.target.style.borderColor = "rgba(255,255,255,0.15)";
+                        e.target.style.color = "rgba(255,255,255,0.75)";
+                        e.target.style.background = "rgba(255,255,255,0.04)";
                         e.target.style.boxShadow = "none";
                         e.target.closest('.marquee-track').style.animationPlayState = 'running';
                       }}>
@@ -454,7 +454,7 @@ function WorkPreview() {
                     <span style={{ fontFamily: "var(--body)", fontSize: "14px", color: p.accent }}>{p.download ? "↓" : "↗"}</span>
                   </div>
                   <div style={{ fontFamily: "var(--display)", fontSize: "22px", fontWeight: 600, color: "#fff", marginBottom: "10px" }}>{p.title}</div>
-                  <div style={{ fontFamily: "var(--body)", fontSize: "14px", lineHeight: 1.7, color: "rgba(255,255,255,0.4)" }}>{p.desc}</div>
+                  <div style={{ fontFamily: "var(--body)", fontSize: "14px", lineHeight: 1.7, color: "rgba(255,255,255,0.75)" }}>{p.desc}</div>
                 </TiltCard>
               </a>
             </Reveal>
@@ -479,12 +479,12 @@ function Contact() {
             The next move<br />is <span style={{ WebkitTextStroke: "1.5px var(--saffron)", color: "transparent" }}>yours</span>.
           </h2>
         </Reveal>
-        <Reveal delay={0.2}><p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.8, color: "rgba(255,255,255,0.4)", margin: "0 0 40px" }}>Whether you need a growth strategist, a data-minded marketer, or someone who sees the whole board — let's talk.</p></Reveal>
+        <Reveal delay={0.2}><p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.8, color: "rgba(255,255,255,0.75)", margin: "0 0 40px" }}>Whether you need a growth strategist, a data-minded marketer, or someone who sees the whole board — let's talk.</p></Reveal>
         <Reveal delay={0.3}>
           <a href="mailto:gagan.97@gmail.com" data-magnetic style={{ display: "inline-block", padding: "16px 44px", background: "var(--saffron)", color: "var(--bg)", textDecoration: "none", fontFamily: "var(--body)", fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px", transition: "all 0.4s", boxShadow: "0 0 40px rgba(218,165,32,0.15)" }} onMouseEnter={e => { e.target.style.background = "#fff"; e.target.style.boxShadow = "0 0 60px rgba(255,255,255,0.1)"; }} onMouseLeave={e => { e.target.style.background = "var(--saffron)"; e.target.style.boxShadow = "0 0 40px rgba(218,165,32,0.15)"; }}>
             gagan.97@gmail.com
           </a>
-          <div style={{ marginTop: "16px", fontFamily: "var(--body)", fontSize: "14px", color: "rgba(255,255,255,0.2)" }}>+1 (774) 290-3032</div>
+          <div style={{ marginTop: "16px", fontFamily: "var(--body)", fontSize: "14px", color: "rgba(255,255,255,0.5)" }}>+1 (774) 290-3032</div>
         </Reveal>
       </div>
     </section>

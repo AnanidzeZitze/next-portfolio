@@ -38,7 +38,7 @@ function RotatingAlbum({ items }) {
   useEffect(() => { setCurrent(0); setLoaded({}); }, [items.length, items[0]?.id]);
 
   const total = items.length;
-  if (!total) return <div style={{ padding: "80px", textAlign: "center", fontFamily: "var(--body)", color: "rgba(255,255,255,0.3)" }}>No items in this category</div>;
+  if (!total) return <div style={{ padding: "80px", textAlign: "center", fontFamily: "var(--body)", color: "rgba(255,255,255,0.6)" }}>No items in this category</div>;
 
   const go = (idx) => {
     if (anim || idx === current) return;
@@ -60,7 +60,7 @@ function RotatingAlbum({ items }) {
       opacity: anim ? 0.1 : 0.3, filter: "blur(1px) brightness(0.5)",
       transition: "all 0.5s cubic-bezier(0.16,1,0.3,1)",
       cursor: "pointer", zIndex: 1, overflow: "hidden",
-      border: "1px solid rgba(255,255,255,0.03)", background: "var(--bg)",
+      border: "1px solid rgba(255,255,255,0.15)", background: "var(--bg)",
     }}>
       <iframe src={items[idx].src} style={{ width: "100%", height: "100%", border: "none", pointerEvents: "none" }} loading="lazy" />
     </div>
@@ -83,7 +83,7 @@ function RotatingAlbum({ items }) {
         }}>
           {!loaded[active.id] && (
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.02) 75%)", backgroundSize: "200% 100%", animation: "shimmer 1.5s infinite", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ fontFamily: "var(--body)", fontSize: "10px", color: "rgba(255,255,255,0.12)", letterSpacing: "3px", textTransform: "uppercase" }}>Loading</div>
+              <div style={{ fontFamily: "var(--body)", fontSize: "10px", color: "rgba(255,255,255,0.4)", letterSpacing: "3px", textTransform: "uppercase" }}>Loading</div>
             </div>
           )}
           <iframe src={active.src} onLoad={() => setLoaded(p => ({ ...p, [active.id]: true }))} style={{ width: "100%", height: "100%", border: "none", opacity: loaded[active.id] ? 1 : 0, transition: "opacity 0.4s" }} loading="lazy" allowFullScreen allow="fullscreen" />
@@ -95,18 +95,18 @@ function RotatingAlbum({ items }) {
 
       {/* Controls */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "28px", marginTop: "32px" }}>
-        <button data-magnetic onClick={prev} style={{ width: "44px", height: "44px", border: "1px solid rgba(255,255,255,0.08)", background: "transparent", color: "rgba(255,255,255,0.4)", fontFamily: "var(--body)", fontSize: "16px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s" }}
+        <button data-magnetic onClick={prev} style={{ width: "44px", height: "44px", border: "1px solid rgba(255,255,255,0.2)", background: "transparent", color: "rgba(255,255,255,0.75)", fontFamily: "var(--body)", fontSize: "16px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s" }}
           onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--saffron)"; e.currentTarget.style.color = "var(--saffron)"; e.currentTarget.style.boxShadow = "0 0 15px rgba(218,165,32,0.1)"; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.color = "rgba(255,255,255,0.4)"; e.currentTarget.style.boxShadow = "none"; }}>←</button>
+          onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; e.currentTarget.style.color = "rgba(255,255,255,0.75)"; e.currentTarget.style.boxShadow = "none"; }}>←</button>
 
         <div style={{ textAlign: "center", minWidth: "200px" }}>
           <div style={{ fontFamily: "var(--display)", fontSize: "18px", fontWeight: 600, color: "#fff", marginBottom: "4px" }}>{active.label}</div>
-          <div style={{ fontFamily: "var(--body)", fontSize: "11px", color: "rgba(255,255,255,0.2)", letterSpacing: "2px" }}>{active.isVideo ? "▶ VIDEO" : active.cat.toUpperCase()} · {current + 1} / {total}</div>
+          <div style={{ fontFamily: "var(--body)", fontSize: "11px", color: "rgba(255,255,255,0.5)", letterSpacing: "2px" }}>{active.isVideo ? "▶ VIDEO" : active.cat.toUpperCase()} · {current + 1} / {total}</div>
         </div>
 
-        <button data-magnetic onClick={next} style={{ width: "44px", height: "44px", border: "1px solid rgba(255,255,255,0.08)", background: "transparent", color: "rgba(255,255,255,0.4)", fontFamily: "var(--body)", fontSize: "16px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s" }}
+        <button data-magnetic onClick={next} style={{ width: "44px", height: "44px", border: "1px solid rgba(255,255,255,0.2)", background: "transparent", color: "rgba(255,255,255,0.75)", fontFamily: "var(--body)", fontSize: "16px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s" }}
           onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--saffron)"; e.currentTarget.style.color = "var(--saffron)"; e.currentTarget.style.boxShadow = "0 0 15px rgba(218,165,32,0.1)"; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.color = "rgba(255,255,255,0.4)"; e.currentTarget.style.boxShadow = "none"; }}>→</button>
+          onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; e.currentTarget.style.color = "rgba(255,255,255,0.75)"; e.currentTarget.style.boxShadow = "none"; }}>→</button>
       </div>
 
       {/* Dots */}
@@ -115,7 +115,7 @@ function RotatingAlbum({ items }) {
           {items.map((_, i) => (
             <button key={i} onClick={() => go(i)} data-magnetic style={{
               width: current === i ? "24px" : "6px", height: "6px", borderRadius: "3px", border: "none",
-              background: current === i ? "var(--saffron)" : "rgba(255,255,255,0.08)",
+              background: current === i ? "var(--saffron)" : "rgba(255,255,255,0.25)",
               boxShadow: current === i ? "0 0 10px rgba(218,165,32,0.2)" : "none",
               cursor: "pointer", transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)", padding: 0,
             }} />
@@ -155,7 +155,7 @@ export default function MyWork() {
             {"Work".split("").map((c, i) => <span key={i} style={{ display: "inline-block", opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(80px) rotate(-5deg)", transition: `all 0.7s cubic-bezier(0.16,1,0.3,1) ${0.55 + i * 0.04}s`, filter: loaded ? "none" : "blur(3px)", WebkitTextStroke: "1.5px var(--saffron)", color: "transparent" }}>{c}</span>)}
             <span style={{ color: "var(--saffron)", opacity: loaded ? 1 : 0, transition: "opacity 0.5s 0.8s" }}>.</span>
           </h1>
-          <p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.4)", opacity: loaded ? 1 : 0, transition: "all 0.8s 0.9s" }}>
+          <p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.75)", opacity: loaded ? 1 : 0, transition: "all 0.8s 0.9s" }}>
             Campaign assets, brand systems, presentations, social media, and video — the visual output of a strategist who thinks in systems and executes with precision.
           </p>
         </div>
@@ -172,13 +172,13 @@ export default function MyWork() {
                 <button key={c.key} data-magnetic onClick={() => setFilter(c.key)} style={{
                   padding: "12px 24px", border: "none", cursor: "pointer",
                   fontFamily: "var(--body)", fontSize: "12px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase",
-                  background: isActive ? "var(--saffron)" : "rgba(255,255,255,0.015)",
-                  color: isActive ? "var(--bg)" : "rgba(255,255,255,0.35)",
-                  boxShadow: isActive ? "0 0 25px rgba(218,165,32,0.15), 0 0 0 1px var(--saffron)" : "0 0 0 1px rgba(255,255,255,0.04)",
+                  background: isActive ? "var(--saffron)" : "rgba(255,255,255,0.05)",
+                  color: isActive ? "var(--bg)" : "rgba(255,255,255,0.7)",
+                  boxShadow: isActive ? "0 0 25px rgba(218,165,32,0.15), 0 0 0 1px var(--saffron)" : "0 0 0 1px rgba(255,255,255,0.15)",
                   transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
                   transform: isActive ? "translateY(-2px)" : "none",
                 }} onMouseEnter={e => { if (!isActive) { e.currentTarget.style.boxShadow = "0 0 0 1px rgba(218,165,32,0.3)"; e.currentTarget.style.color = "var(--saffron)"; } }}
-                  onMouseLeave={e => { if (!isActive) { e.currentTarget.style.boxShadow = "0 0 0 1px rgba(255,255,255,0.04)"; e.currentTarget.style.color = "rgba(255,255,255,0.35)"; } }}>
+                  onMouseLeave={e => { if (!isActive) { e.currentTarget.style.boxShadow = "0 0 0 1px rgba(255,255,255,0.15)"; e.currentTarget.style.color = "rgba(255,255,255,0.7)"; } }}>
                   {c.label}<span style={{ marginLeft: "6px", opacity: 0.5, fontSize: "10px" }}>{count}</span>
                 </button>
               );
@@ -198,7 +198,7 @@ export default function MyWork() {
       <section style={{ padding: "0 var(--px) 120px", position: "relative" }}>
         <KolamMotif size={350} color="var(--steel)" animate style={{ position: "absolute", right: "-100px", bottom: "0px", opacity: 0.08 }} />
         <Reveal>
-          <div style={{ padding: "56px", textAlign: "center", maxWidth: "900px", margin: "0 auto", background: "rgba(12,10,8,0.5)", backdropFilter: "blur(16px) saturate(140%)", border: "1px solid rgba(255,255,255,0.04)", boxShadow: "0 10px 40px rgba(0,0,0,0.2)", position: "relative", zIndex: 2 }}>
+          <div style={{ padding: "56px", textAlign: "center", maxWidth: "900px", margin: "0 auto", background: "rgba(12,10,8,0.5)", backdropFilter: "blur(16px) saturate(140%)", border: "1px solid rgba(255,255,255,0.15)", boxShadow: "0 10px 40px rgba(0,0,0,0.2)", position: "relative", zIndex: 2 }}>
             <div style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 600, color: "#fff", margin: "0 0 16px" }}>Interested in working together<span style={{ color: "var(--saffron)" }}>?</span></div>
             <a href="mailto:gagan.97@gmail.com" data-magnetic style={{ display: "inline-block", padding: "14px 36px", background: "var(--saffron)", color: "var(--bg)", textDecoration: "none", fontFamily: "var(--body)", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", transition: "all 0.4s", boxShadow: "0 0 30px rgba(218,165,32,0.12)" }}
               onMouseEnter={e => { e.target.style.background = "#fff"; e.target.style.boxShadow = "0 0 50px rgba(255,255,255,0.08)"; }}
