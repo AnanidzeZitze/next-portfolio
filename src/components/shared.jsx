@@ -146,20 +146,22 @@ export function MagneticCursor() {
         <>
             <div className="cursor-outer" style={{
                 position: "fixed", zIndex: 99998, pointerEvents: "none",
-                width: hovering ? "40px" : "24px", height: hovering ? "40px" : "24px",
-                border: `1.5px ${hovering ? "solid var(--saffron)" : "dashed rgba(255,255,255,0.3)"}`,
+                width: hovering ? "34px" : "28px", height: hovering ? "34px" : "28px",
+                border: `1.5px solid ${hovering ? "var(--saffron)" : "rgba(255,255,255,0.4)"}`,
                 left: pos.x, top: pos.y,
-                transform: `translate(-50%, -50%) rotate(${hovering ? 45 : 0}deg) scale(${clicking ? 0.8 : 1})`,
-                transition: "width 0.3s, height 0.3s, border 0.3s, transform 0.3s cubic-bezier(0.16,1,0.3,1)",
+                clipPath: hovering ? "polygon(0 0, 100% 0, 100% 100%, 0 100%)" : "polygon(25% 0, 75% 0, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0 75%, 0 25%)",
+                WebkitClipPath: hovering ? "polygon(0 0, 100% 0, 100% 100%, 0 100%)" : "polygon(25% 0, 75% 0, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0 75%, 0 25%)",
+                transform: `translate(-50%, -50%) rotate(45deg) scale(${clicking ? 0.8 : 1})`,
+                transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
                 mixBlendMode: "difference",
             }} />
             <div style={{
                 position: "fixed", zIndex: 99998, pointerEvents: "none",
-                width: hovering ? "20px" : "6px", height: hovering ? "20px" : "6px",
+                width: hovering ? "16px" : "6px", height: hovering ? "16px" : "6px",
                 background: "var(--saffron)",
                 left: pos.x, top: pos.y,
                 transform: "translate(-50%, -50%) rotate(45deg)",
-                transition: "width 0.3s cubic-bezier(0.16,1,0.3,1), height 0.3s cubic-bezier(0.16,1,0.3,1)",
+                transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
             }} />
         </>
     );
