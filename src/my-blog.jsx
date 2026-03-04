@@ -22,7 +22,7 @@ export default function MyBlog() {
     const existingScript = document.getElementById("rssapp-script");
     if (!existingScript) {
       const script = document.createElement("script");
-      script.src = "https://widget.rss.app/v1/wall.js";
+      script.src = "https://widget.rss.app/v1/magazine.js";
       script.id = "rssapp-script";
       script.async = true;
       script.onload = () => {
@@ -160,6 +160,7 @@ export default function MyBlog() {
             backdropFilter: "blur(16px) saturate(140%)",
             border: "1px solid rgba(255,255,255,0.15)",
             boxShadow: "0 10px 40px rgba(0,0,0,0.25)",
+            position: "relative", zIndex: 10, pointerEvents: "auto",
           }}>
             {/* Header — glassmorphism bar */}
             <div style={{
@@ -205,9 +206,9 @@ export default function MyBlog() {
               </div>
             )}
 
-            {/* RSS Widget (Dynamic Height) */}
-            <div style={{ width: "100%", background: "var(--bg)", display: feedLoaded ? "block" : "none" }}>
-              <rssapp-wall id="Am3kjPWYpKWqVRPv"></rssapp-wall>
+            {/* RSS Widget (Dynamic Height & Multi-column) */}
+            <div style={{ width: "100%", background: "var(--bg)", display: feedLoaded ? "block" : "none", pointerEvents: "auto", position: "relative", zIndex: 15 }}>
+              <rssapp-magazine id="Am3kjPWYpKWqVRPv"></rssapp-magazine>
             </div>
           </div>
         </Reveal>
