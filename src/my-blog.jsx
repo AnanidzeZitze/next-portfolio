@@ -22,7 +22,7 @@ export default function MyBlog() {
     const existingScript = document.getElementById("rssapp-script");
     if (!existingScript) {
       const script = document.createElement("script");
-      script.src = "https://widget.rss.app/v1/magazine.js";
+      script.src = "https://widget.rss.app/v1/wall.js";
       script.id = "rssapp-script";
       script.async = true;
       script.onload = () => {
@@ -206,9 +206,9 @@ export default function MyBlog() {
               </div>
             )}
 
-            {/* RSS Widget (Dynamic Height & Multi-column) */}
+            {/* RSS Widget (Dynamic Height - Wall Grid) */}
             <div style={{ width: "100%", background: "var(--bg)", display: feedLoaded ? "block" : "none", pointerEvents: "auto", position: "relative", zIndex: 15 }}>
-              <rssapp-magazine id="Am3kjPWYpKWqVRPv"></rssapp-magazine>
+              <rssapp-wall id="Am3kjPWYpKWqVRPv"></rssapp-wall>
             </div>
           </div>
         </Reveal>
