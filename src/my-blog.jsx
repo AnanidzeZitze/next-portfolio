@@ -18,6 +18,27 @@ export default function MyBlog() {
   const scrollY = useScroll();
   const onDone = useCallback(() => setLoaded(true), []);
 
+  useEffect(() => {
+    const existingScript = document.getElementById("rssapp-script");
+    if (!existingScript) {
+      const script = document.createElement("script");
+      script.src = "https://widget.rss.app/v1/wall.js";
+      script.id = "rssapp-script";
+      script.async = true;
+      script.onload = () => {
+        // Give the widget a moment to render before fading out skeleton
+        setTimeout(() => setFeedLoaded(true), 1200);
+      };
+      document.body.appendChild(script);
+    } else {
+      setTimeout(() => setFeedLoaded(true), 800);
+    }
+
+    return () => {
+      // We don't necessarily want to remove the script as subsequent mounts might need it
+    };
+  }, []);
+
   const parallaxSlow = scrollY * 0.12;
 
   const topics = [
@@ -184,21 +205,9 @@ export default function MyBlog() {
               </div>
             )}
 
-            {/* RSS iframe */}
-            <div style={{ width: "100%", height: feedLoaded ? "auto" : "800px", minHeight: feedLoaded ? "1200px" : "auto", display: "block" }}>
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://rss.app/embed/v1/wall/Am3kjPWYpKWqVRPv"
-                frameBorder="0"
-                onLoad={() => setFeedLoaded(true)}
-                style={{
-                  width: "100%", minHeight: "1200px", border: "none",
-                  background: "var(--bg)",
-                  opacity: feedLoaded ? 1 : 0,
-                  transition: "opacity 0.6s ease",
-                }}
-              />
+            {/* RSS Widget (Dynamic Height) */}
+            <div style={{ width: "100%", background: "var(--bg)", display: feedLoaded ? "block" : "none" }}>
+              <rssapp-wall id="Am3kjPWYpKWqVRPv"></rssapp-wall>
             </div>
           </div>
         </Reveal>
