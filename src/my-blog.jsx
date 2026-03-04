@@ -155,12 +155,12 @@ export default function MyBlog() {
       <section style={{ padding: "0 var(--px) 100px" }}>
         <Reveal>
           <div style={{
-            maxWidth: "1000px", margin: "0 auto", overflow: "hidden",
+            maxWidth: "1000px", margin: "0 auto",
             background: "rgba(12,10,8,0.5)",
             backdropFilter: "blur(16px) saturate(140%)",
             border: "1px solid rgba(255,255,255,0.15)",
             boxShadow: "0 10px 40px rgba(0,0,0,0.25)",
-            position: "relative", zIndex: 10, pointerEvents: "auto",
+            position: "relative", zIndex: 10,
           }}>
             {/* Header — glassmorphism bar */}
             <div style={{
@@ -209,14 +209,11 @@ export default function MyBlog() {
             {/* RSS Widget (Dynamic Height - Wall Grid) */}
             <div style={{
               width: "100%",
-              background: "var(--bg)",
-              opacity: feedLoaded ? 1 : 0,
-              height: feedLoaded ? "auto" : "0",
-              overflow: feedLoaded ? "visible" : "hidden",
-              pointerEvents: feedLoaded ? "auto" : "none",
+              background: "transparent",
               position: "relative",
               zIndex: 15,
-              transition: "opacity 0.5s ease"
+              minHeight: feedLoaded ? "auto" : "800px",
+              display: "block"
             }}>
               <rssapp-wall id="Am3kjPWYpKWqVRPv"></rssapp-wall>
             </div>
