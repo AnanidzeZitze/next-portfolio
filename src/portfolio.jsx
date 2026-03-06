@@ -10,7 +10,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
  */
 
 import { useScroll, useInView } from "./hooks/index.js";
-import { Preloader, MagneticCursor, GradientMesh, Reveal, TiltCard, GlassPanel, KolamMotif, Nav, Footer, GlobalStyles, clamp } from "./components/shared.jsx";
+import { Preloader, MagneticCursor, GradientMesh, Reveal, TiltCard, GlassPanel, KolamMotif, Nav, Footer, GlobalStyles, clamp, Magnetic } from "./components/shared.jsx";
 
 
 // ═══════════════════════════════════════════════════════════
@@ -37,9 +37,9 @@ function Hero() {
       <div style={{ position: "relative", zIndex: 1, maxWidth: "860px", opacity: heroOpacity, transform: `translateY(${parallaxSlow * 0.5}px)` }}>
         {/* Cultural flags */}
         <div style={{ opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(20px)", transition: "all 0.8s ease 0.3s", display: "flex", gap: "20px", marginBottom: "32px", flexWrap: "wrap" }}>
-          {[{ flag: "🇩🇪", label: "Built in Germany" }, { flag: "🇮🇳", label: "Forged in India" }, { flag: "🇺🇸", label: "Sharpened in America" }].map((item, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", fontFamily: "var(--body)", fontSize: "11px", fontWeight: 500, letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>
-              <span style={{ fontSize: "14px" }}>{item.flag}</span> {item.label}
+          {[{ flag: "[GER]", label: "Built in Germany", color: "var(--steel)" }, { flag: "[IND]", label: "Forged in India", color: "var(--saffron)" }, { flag: "[USA]", label: "Sharpened in America", color: "var(--lime)" }].map((item, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "var(--body)", fontSize: "11px", fontWeight: 500, letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>
+              <span style={{ fontSize: "11px", color: item.color, fontWeight: 700 }}>{item.flag}</span> {item.label}
             </div>
           ))}
         </div>
@@ -83,18 +83,22 @@ function Hero() {
 
         {/* CTAs with ripple effect */}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(30px)", transition: "all 0.9s cubic-bezier(0.16,1,0.3,1) 1.6s" }}>
-          <a href="/my-marketing-work" data-magnetic className="btn-primary" style={{
-            position: "relative", overflow: "hidden",
-            padding: "14px 36px", background: "var(--saffron)", color: "var(--bg)", textDecoration: "none",
-            fontFamily: "var(--body)", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
-            transition: "all 0.4s", boxShadow: "0 0 30px rgba(218,165,32,0.15)",
-          }}>Explore My Work</a>
-          <a href="#contact" data-magnetic style={{
-            padding: "14px 36px", background: "transparent", border: "1px solid rgba(255,255,255,0.25)",
-            color: "rgba(255,255,255,0.9)", textDecoration: "none",
-            fontFamily: "var(--body)", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
-            transition: "all 0.4s",
-          }}>Contact</a>
+          <Magnetic strength={0.4}>
+            <a href="/my-marketing-work" data-magnetic className="btn-primary" style={{
+              position: "relative", overflow: "hidden", display: "inline-block",
+              padding: "14px 36px", background: "var(--saffron)", color: "var(--bg)", textDecoration: "none",
+              fontFamily: "var(--body)", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
+              transition: "all 0.4s", boxShadow: "0 0 30px rgba(218,165,32,0.15)",
+            }}>Explore My Work</a>
+          </Magnetic>
+          <Magnetic strength={0.4}>
+            <a href="#contact" data-magnetic style={{
+              padding: "14px 36px", background: "transparent", border: "1px solid rgba(255,255,255,0.25)", display: "inline-block",
+              color: "rgba(255,255,255,0.9)", textDecoration: "none",
+              fontFamily: "var(--body)", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
+              transition: "all 0.4s",
+            }}>Contact</a>
+          </Magnetic>
         </div>
       </div>
 
@@ -205,14 +209,14 @@ function About() {
 function Experience() {
   const [activeRole, setActiveRole] = useState(0);
   const roles = [
-    { title: "Marketing & Operations Consultant", company: "Grimes King Foundation", loc: "Boston, USA", period: "Aug 2023 — Present", flag: "🇺🇸", accent: "var(--lime)", highlights: ["Digitized donor & grant system (80+ applicants) — 40% faster processing", "+50% donor engagement via SEO + email campaigns", "End-to-end CRM, WordPress, and marketing operations", "Built scalable digital workflows for non-profit operations"], tools: ["WordPress", "Mailchimp", "SEO", "Canva"] },
-    { title: "Digital Marketing Manager", company: "Moksha Creations", loc: "Bengaluru, India", period: "Feb 2022 — Aug 2023", flag: "🇮🇳", accent: "var(--saffron)", highlights: ["Launched e-commerce platform → doubled online sales in 3 months", "+230% engagement via social media, blogs & paid campaigns", "Integrated analytics dashboards → +30% qualified leads", "Managed $50K+ ad spend across Google, Meta, and LinkedIn"], tools: ["Google Ads", "Meta Ads", "Shopify", "GA4", "Tableau", "Canva"] },
-    { title: "Growth Marketing & Pricing Analyst", company: "Petropath Fluids India", loc: "Bengaluru, India", period: "Jan 2021 — Aug 2023", flag: "🇮🇳", accent: "var(--saffron)", highlights: ["15+ digital campaigns → +30% B2B leads, +20% sales inquiries", "Pricing/profitability models supporting $10M+ bids", "Website redesign → bounce rate ↓25%, session time ↑60s", "Built financial models (DCF, 3-statement) for strategic decisions"], tools: ["Excel", "Power BI", "Salesforce", "SEMrush", "WordPress", "Financial Modeling"] },
-    { title: "Digital Marketing Intern", company: "GAO Tek Inc.", loc: "NYC (Remote)", period: "Oct 2019 — Mar 2020", flag: "🇺🇸", accent: "var(--steel)", highlights: ["+35% organic traffic via Amazon SEO & keyword optimization", "+22% conversion rates through A/B testing & optimized listings", "Managed product listings across multiple e-commerce platforms"], tools: ["Amazon Seller Central", "SEMrush", "A/B Testing", "Google Analytics"] },
+    { title: "Marketing & Operations Consultant", company: "Grimes King Foundation", loc: "Boston, USA", period: "Aug 2023 — Present", flag: "[USA]", accent: "var(--lime)", highlights: ["Digitized donor & grant system (80+ applicants) — 40% faster processing", "+50% donor engagement via SEO + email campaigns", "End-to-end CRM, WordPress, and marketing operations", "Built scalable digital workflows for non-profit operations"], tools: ["WordPress", "Mailchimp", "SEO", "Canva"] },
+    { title: "Digital Marketing Manager", company: "Moksha Creations", loc: "Bengaluru, India", period: "Feb 2022 — Aug 2023", flag: "[IND]", accent: "var(--saffron)", highlights: ["Launched e-commerce platform → doubled online sales in 3 months", "+230% engagement via social media, blogs & paid campaigns", "Integrated analytics dashboards → +30% qualified leads", "Managed $50K+ ad spend across Google, Meta, and LinkedIn"], tools: ["Google Ads", "Meta Ads", "Shopify", "GA4", "Tableau", "Canva"] },
+    { title: "Growth Marketing & Pricing Analyst", company: "Petropath Fluids India", loc: "Bengaluru, India", period: "Jan 2021 — Aug 2023", flag: "[IND]", accent: "var(--saffron)", highlights: ["15+ digital campaigns → +30% B2B leads, +20% sales inquiries", "Pricing/profitability models supporting $10M+ bids", "Website redesign → bounce rate ↓25%, session time ↑60s", "Built financial models (DCF, 3-statement) for strategic decisions"], tools: ["Excel", "Power BI", "Salesforce", "SEMrush", "WordPress", "Financial Modeling"] },
+    { title: "Digital Marketing Intern", company: "GAO Tek Inc.", loc: "NYC (Remote)", period: "Oct 2019 — Mar 2020", flag: "[USA]", accent: "var(--steel)", highlights: ["+35% organic traffic via Amazon SEO & keyword optimization", "+22% conversion rates through A/B testing & optimized listings", "Managed product listings across multiple e-commerce platforms"], tools: ["Amazon Seller Central", "SEMrush", "A/B Testing", "Google Analytics"] },
   ];
   const education = [
-    { degree: "MBA — Quant Finance; Analytics & ML", school: "Babson College", loc: "MA, USA", gpa: "3.6", flag: "🇺🇸", accent: "var(--lime)" },
-    { degree: "B.Eng — Business & Engineering", school: "TH Schweinfurt", loc: "Germany", gpa: "3.87", flag: "🇩🇪", accent: "var(--steel)" },
+    { degree: "MBA — Quant Finance; Analytics & ML", school: "Babson College", loc: "MA, USA", gpa: "3.6", flag: "[USA]", accent: "var(--lime)" },
+    { degree: "B.Eng — Business & Engineering", school: "TH Schweinfurt", loc: "Germany", gpa: "3.87", flag: "[GER]", accent: "var(--steel)" },
   ];
 
   const active = roles[activeRole];
@@ -251,8 +255,8 @@ function Experience() {
                     <div style={{ fontFamily: "var(--display)", fontSize: "16px", fontWeight: 600, color: isActive ? "#fff" : "rgba(255,255,255,0.7)", transition: "color 0.3s", marginBottom: "3px" }}>
                       {r.title}
                     </div>
-                    <div style={{ fontFamily: "var(--body)", fontSize: "12px", color: isActive ? r.accent : "rgba(255,255,255,0.5)", transition: "color 0.3s", display: "flex", alignItems: "center", gap: "6px" }}>
-                      <span>{r.flag}</span> {r.company}
+                    <div style={{ fontFamily: "var(--body)", fontSize: "12px", color: isActive ? r.accent : "rgba(255,255,255,0.5)", transition: "color 0.3s", display: "flex", alignItems: "center", gap: "8px" }}>
+                      <span style={{ fontSize: "10px", fontWeight: 700 }}>{r.flag}</span> {r.company}
                     </div>
                     {/* Active indicator dot */}
                     {isActive && <div style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", width: "6px", height: "6px", borderRadius: "50%", background: r.accent, boxShadow: `0 0 10px ${r.accent}66` }} />}
@@ -282,7 +286,7 @@ function Experience() {
                   {active.title}
                 </div>
                 <div style={{ fontFamily: "var(--body)", fontSize: "14px", color: "rgba(255,255,255,0.7)", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <span style={{ fontSize: "16px" }}>{active.flag}</span> {active.company} · {active.loc}
+                  <span style={{ fontSize: "11px", fontWeight: 700, color: active.accent }}>{active.flag}</span> {active.company} · {active.loc}
                 </div>
               </div>
             </div>
@@ -330,7 +334,7 @@ function Experience() {
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                     <div>
                       <div style={{ fontFamily: "var(--display)", fontSize: "16px", fontWeight: 600, color: "#fff", marginBottom: "6px", lineHeight: 1.3 }}>{ed.degree}</div>
-                      <div style={{ fontFamily: "var(--body)", fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", gap: "6px" }}><span>{ed.flag}</span> {ed.school}, {ed.loc}</div>
+                      <div style={{ fontFamily: "var(--body)", fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", gap: "8px" }}><span style={{ fontSize: "10px", fontWeight: 700, color: ed.accent }}>{ed.flag}</span> {ed.school}, {ed.loc}</div>
                     </div>
                     <div style={{ fontFamily: "var(--display)", fontSize: "28px", fontWeight: 600, color: ed.accent, opacity: 0.85, textShadow: `0 0 20px ${ed.accent}44` }}>{ed.gpa}</div>
                   </div>
@@ -481,9 +485,11 @@ function Contact() {
         </Reveal>
         <Reveal delay={0.2}><p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.8, color: "rgba(255,255,255,0.75)", margin: "0 0 40px" }}>Whether you need a growth strategist, a data-minded marketer, or someone who sees the whole board — let's talk.</p></Reveal>
         <Reveal delay={0.3}>
-          <a href="mailto:gagan.97@gmail.com" data-magnetic style={{ display: "inline-block", padding: "16px 44px", background: "var(--saffron)", color: "var(--bg)", textDecoration: "none", fontFamily: "var(--body)", fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px", transition: "all 0.4s", boxShadow: "0 0 40px rgba(218,165,32,0.15)" }} onMouseEnter={e => { e.target.style.background = "#fff"; e.target.style.boxShadow = "0 0 60px rgba(255,255,255,0.1)"; }} onMouseLeave={e => { e.target.style.background = "var(--saffron)"; e.target.style.boxShadow = "0 0 40px rgba(218,165,32,0.15)"; }}>
-            gagan.97@gmail.com
-          </a>
+          <Magnetic strength={0.4}>
+            <a href="mailto:gagan.97@gmail.com" data-magnetic style={{ display: "inline-block", padding: "16px 44px", background: "var(--saffron)", color: "var(--bg)", textDecoration: "none", fontFamily: "var(--body)", fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px", transition: "all 0.4s", boxShadow: "0 0 40px rgba(218,165,32,0.15)" }} onMouseEnter={e => { e.target.style.background = "#fff"; e.target.style.boxShadow = "0 0 60px rgba(255,255,255,0.1)"; }} onMouseLeave={e => { e.target.style.background = "var(--saffron)"; e.target.style.boxShadow = "0 0 40px rgba(218,165,32,0.15)"; }}>
+              gagan.97@gmail.com
+            </a>
+          </Magnetic>
           <div style={{ marginTop: "16px", fontFamily: "var(--body)", fontSize: "14px", color: "rgba(255,255,255,0.5)" }}>+1 (774) 290-3032</div>
         </Reveal>
       </div>

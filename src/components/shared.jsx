@@ -67,6 +67,42 @@ export function GlobalStyles() {
 export const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
 export const lerp = (a, b, t) => a + (b - a) * t;
 
+export function Magnetic({ children, strength = 0.25, style = {}, ...props }) {
+    const ref = useRef(null);
+    const [pos, setPos] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e) => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const x = (e.clientX - (rect.left + rect.width / 2)) * strength;
+        const y = (e.clientY - (rect.top + rect.height / 2)) * strength;
+        setPos({ x, y });
+    };
+
+    const handleMouseLeave = () => {
+        setPos({ x: 0, y: 0 });
+    };
+
+    return (
+        <div
+            ref={ref}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{
+                transform: `translate(${pos.x}px, ${pos.y}px)`,
+                transition: pos.x === 0 && pos.y === 0 ? "transform 0.5s cubic-bezier(0.16,1,0.3,1)" : "transform 0.1s linear",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                ...style
+            }}
+            {...props}
+        >
+            {children}
+        </div>
+    );
+}
+
 export function Preloader({ onComplete, title = "Gagan", dotColor = "var(--saffron)" }) {
     const [progress, setProgress] = useState(0);
     const [exiting, setExiting] = useState(false);
@@ -220,6 +256,7 @@ export function TiltCard({ children, style = {}, glowColor = "var(--saffron)" })
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
     const [hovering, setHovering] = useState(false);
     const [ripple, setRipple] = useState(null);
+    const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
     const handleMove = (e) => {
         if (!cardRef.current) return;
@@ -227,6 +264,10 @@ export function TiltCard({ children, style = {}, glowColor = "var(--saffron)" })
         const x = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
         const y = ((e.clientY - rect.top) / rect.height - 0.5) * -12;
         setTilt({ x, y });
+        setMousePos({
+            x: ((e.clientX - rect.left) / rect.width) * 100,
+            y: ((e.clientY - rect.top) / rect.height) * 100
+        });
     };
 
     const handleClick = (e) => {
@@ -252,7 +293,7 @@ export function TiltCard({ children, style = {}, glowColor = "var(--saffron)" })
             {hovering && (
                 <div style={{
                     position: "absolute", inset: 0, pointerEvents: "none",
-                    background: `radial-gradient(circle at ${(tilt.x / 12 + 0.5) * 100}% ${(-tilt.y / 12 + 0.5) * 100}%, ${glowColor}0a 0%, transparent 60%)`,
+                    background: `radial-gradient(600px circle at ${mousePos.x}% ${mousePos.y}%, ${glowColor}1a, transparent 40%)`,
                 }} />
             )}
             {ripple && (
