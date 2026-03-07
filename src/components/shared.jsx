@@ -67,42 +67,6 @@ export function GlobalStyles() {
 export const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
 export const lerp = (a, b, t) => a + (b - a) * t;
 
-export function Magnetic({ children, strength = 0.25, style = {}, ...props }) {
-    const ref = useRef(null);
-    const [pos, setPos] = useState({ x: 0, y: 0 });
-
-    const handleMouseMove = (e) => {
-        if (!ref.current) return;
-        const rect = ref.current.getBoundingClientRect();
-        const x = (e.clientX - (rect.left + rect.width / 2)) * strength;
-        const y = (e.clientY - (rect.top + rect.height / 2)) * strength;
-        setPos({ x, y });
-    };
-
-    const handleMouseLeave = () => {
-        setPos({ x: 0, y: 0 });
-    };
-
-    return (
-        <div
-            ref={ref}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{
-                transform: `translate(${pos.x}px, ${pos.y}px)`,
-                transition: pos.x === 0 && pos.y === 0 ? "transform 0.5s cubic-bezier(0.16,1,0.3,1)" : "transform 0.1s linear",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                ...style
-            }}
-            {...props}
-        >
-            {children}
-        </div>
-    );
-}
-
 export function Preloader({ onComplete, title = "Gagan", dotColor = "var(--saffron)" }) {
     const [progress, setProgress] = useState(0);
     const [exiting, setExiting] = useState(false);
@@ -256,7 +220,6 @@ export function TiltCard({ children, style = {}, glowColor = "var(--saffron)" })
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
     const [hovering, setHovering] = useState(false);
     const [ripple, setRipple] = useState(null);
-    const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
     const handleMove = (e) => {
         if (!cardRef.current) return;
@@ -264,10 +227,6 @@ export function TiltCard({ children, style = {}, glowColor = "var(--saffron)" })
         const x = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
         const y = ((e.clientY - rect.top) / rect.height - 0.5) * -12;
         setTilt({ x, y });
-        setMousePos({
-            x: ((e.clientX - rect.left) / rect.width) * 100,
-            y: ((e.clientY - rect.top) / rect.height) * 100
-        });
     };
 
     const handleClick = (e) => {
@@ -293,7 +252,7 @@ export function TiltCard({ children, style = {}, glowColor = "var(--saffron)" })
             {hovering && (
                 <div style={{
                     position: "absolute", inset: 0, pointerEvents: "none",
-                    background: `radial-gradient(600px circle at ${mousePos.x}% ${mousePos.y}%, ${glowColor}1a, transparent 40%)`,
+                    background: `radial-gradient(circle at ${(tilt.x / 12 + 0.5) * 100}% ${(-tilt.y / 12 + 0.5) * 100}%, ${glowColor}0a 0%, transparent 60%)`,
                 }} />
             )}
             {ripple && (
@@ -434,5 +393,74 @@ export function Footer({ links }) {
                 ))}
             </div>
         </footer>
+    );
+}
+
+import webGLFluidEnhanced from 'webgl-fluid-enhanced';
+
+export function FluidBackground() {
+    const canvasRef = useRef(null);
+
+    useEffect(() => {
+        if (!canvasRef.current) return;
+
+        // Initialize with aesthetics matching the portfolio theme
+        // Saffron, Steel, Lime accent colors
+        webGLFluidEnhanced.simulation(canvasRef.current, {
+            SIM_RESOLUTION: 128,
+            DYE_RESOLUTION: 512,
+            CAPTURE_RESOLUTION: 512,
+            DENSITY_DISSIPATION: 3,
+            VELOCITY_DISSIPATION: 1.5,
+            PRESSURE: 0.1,
+            PRESSURE_ITERATIONS: 20,
+            CURL: 3,
+            SPLAT_RADIUS: 0.2,
+            SPLAT_FORCE: 6000,
+            SHADING: true,
+            COLOR_UPDATE_SPEED: 10,
+            PAUSE_ON_BLUR: true,
+            BACK_COLOR: { r: 8, g: 6, b: 4 }, // Matches var(--bg) #080604
+            TRANSPARENT: true,
+            BLOOM: true,
+            BLOOM_ITERATIONS: 8,
+            BLOOM_RESOLUTION: 256,
+            BLOOM_INTENSITY: 0.8,
+            BLOOM_THRESHOLD: 0.6,
+            BLOOM_SOFT_KNEE: 0.7,
+            SUNRAYS: true,
+            SUNRAYS_RESOLUTION: 196,
+            SUNRAYS_WEIGHT: 1.0,
+            COLOR_PALETTE: ['#daa520', '#6b8cae', '#b8d435'], // Saffron, Steel, Lime
+        });
+
+        // Trigger a couple initial splats to show it's active
+        setTimeout(() => {
+            webGLFluidEnhanced.splat(
+                canvasRef.current.width / 2,
+                canvasRef.current.height / 2,
+                100,
+                '#daa520'
+            )
+        }, 1000);
+
+        return () => {
+            // Clean up could be implemented if the package supports it, but usually the canvas will just be unmounted
+        };
+    }, []);
+
+    return (
+        <canvas
+            ref={canvasRef}
+            style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                zIndex: -5,
+                pointerEvents: 'auto', // Needs pointer events to track mouse
+            }}
+        />
     );
 }
