@@ -396,7 +396,7 @@ export function Footer({ links }) {
     );
 }
 
-import webGLFluidEnhanced from 'webgl-fluid-enhanced';
+import WebGLFluidEnhanced from 'webgl-fluid-enhanced';
 
 export function FluidBackground() {
     const canvasRef = useRef(null);
@@ -404,48 +404,44 @@ export function FluidBackground() {
     useEffect(() => {
         if (!canvasRef.current) return;
 
-        // Initialize with aesthetics matching the portfolio theme
-        // Saffron, Steel, Lime accent colors
-        webGLFluidEnhanced.simulation(canvasRef.current, {
-            SIM_RESOLUTION: 128,
-            DYE_RESOLUTION: 512,
-            CAPTURE_RESOLUTION: 512,
-            DENSITY_DISSIPATION: 3,
-            VELOCITY_DISSIPATION: 1.5,
-            PRESSURE: 0.1,
-            PRESSURE_ITERATIONS: 20,
-            CURL: 3,
-            SPLAT_RADIUS: 0.2,
-            SPLAT_FORCE: 6000,
-            SHADING: true,
-            COLOR_UPDATE_SPEED: 10,
-            PAUSE_ON_BLUR: true,
-            BACK_COLOR: { r: 8, g: 6, b: 4 }, // Matches var(--bg) #080604
-            TRANSPARENT: true,
-            BLOOM: true,
-            BLOOM_ITERATIONS: 8,
-            BLOOM_RESOLUTION: 256,
-            BLOOM_INTENSITY: 0.8,
-            BLOOM_THRESHOLD: 0.6,
-            BLOOM_SOFT_KNEE: 0.7,
-            SUNRAYS: true,
-            SUNRAYS_RESOLUTION: 196,
-            SUNRAYS_WEIGHT: 1.0,
-            COLOR_PALETTE: ['#daa520', '#6b8cae', '#b8d435'], // Saffron, Steel, Lime
+        const simulation = new WebGLFluidEnhanced(canvasRef.current);
+
+        simulation.setConfig({
+            simResolution: 128,
+            dyeResolution: 512,
+            captureResolution: 512,
+            densityDissipation: 3,
+            velocityDissipation: 1.5,
+            pressure: 0.1,
+            pressureIterations: 20,
+            curl: 3,
+            splatRadius: 0.2,
+            splatForce: 6000,
+            shading: true,
+            colorUpdateSpeed: 10,
+            backgroundColor: '#080604', // Matches var(--bg)
+            transparent: true,
+            bloom: true,
+            bloomIterations: 8,
+            bloomResolution: 256,
+            bloomIntensity: 0.8,
+            bloomThreshold: 0.6,
+            bloomSoftKnee: 0.7,
+            sunrays: true,
+            sunraysResolution: 196,
+            sunraysWeight: 1.0,
+            colorPalette: ['#daa520', '#6b8cae', '#b8d435'], // Saffron, Steel, Lime
         });
+
+        simulation.start();
 
         // Trigger a couple initial splats to show it's active
         setTimeout(() => {
-            webGLFluidEnhanced.splat(
-                canvasRef.current.width / 2,
-                canvasRef.current.height / 2,
-                100,
-                '#daa520'
-            )
+            simulation.multipleSplats(3);
         }, 1000);
 
         return () => {
-            // Clean up could be implemented if the package supports it, but usually the canvas will just be unmounted
+            simulation.stop();
         };
     }, []);
 

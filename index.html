@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gagan Bhaskar Naik | Portfolio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gagan Bhaskar Naik | Portfolio</title>
+</head>
+
+<body>
+  <div id="error-log"
+    style="position: absolute; top:0; left:0; z-index:99999; background:red; color:white; font-size:14px; white-space:pre-wrap;">
+  </div>
+  <script>
+    window.addEventListener('error', (event) => {
+      document.getElementById('error-log').textContent += '\n' + event.error.stack;
+    });
+    window.addEventListener('unhandledrejection', (event) => {
+      document.getElementById('error-log').textContent += '\nPromise Rejection: ' + event.reason;
+    });
+  </script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
