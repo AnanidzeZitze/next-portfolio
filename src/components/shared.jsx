@@ -446,17 +446,23 @@ export function FluidBackground() {
     }, []);
 
     return (
-        <canvas
-            ref={canvasRef}
-            style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100vw',
-                height: '100vh',
-                zIndex: -5,
-                pointerEvents: 'auto', // Needs pointer events to track mouse
-            }}
-        />
+        <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            zIndex: -5,
+            pointerEvents: 'auto',
+        }}>
+            <canvas
+                ref={canvasRef}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'block'
+                }}
+            />
+        </div>
     );
 }
