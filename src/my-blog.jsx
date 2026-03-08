@@ -241,7 +241,7 @@ export default function MyBlog() {
                           <p style={{ fontFamily: "var(--body)", fontSize: "14px", color: "rgba(255,255,255,0.7)", lineHeight: "1.6", margin: "0 0 24px", flex: 1 }}>
                             {post.snippet}
                           </p>
-                          <div style={{ fontFamily: "var(--body)", fontSize: "12px", fontWeight: "600", color: "var(--lime)", letterSpacing: "1px", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "6px" }}>
+                          <div style={{ fontFamily: "var(--body)", fontSize: "12px", fontWeight: "600", color: "var(--saffron)", letterSpacing: "1px", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "6px" }}>
                             Read More <svg width="12" height="12" viewBox="0 0 12 12"><path d="M1 6 L11 6 M7 2 L11 6 L7 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                           </div>
                         </div>
