@@ -30,8 +30,67 @@ export function GlobalStyles() {
       .logo-diamond { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
       a:hover .logo-diamond { transform: rotate(90deg); }
 
-      .btn-primary:hover { background: #fff !important; box-shadow: 0 0 60px rgba(255,255,255,0.1) !important; }
-
+      .btn-primary {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        padding: 14px 36px;
+        background: var(--saffron);
+        color: var(--bg);
+        text-decoration: none;
+        font-family: var(--body);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: all 0.4s;
+        box-shadow: 0 0 30px rgba(218,165,32,0.15);
+        cursor: pointer;
+        border: none;
+      }
+      .btn-primary:hover { 
+        background: #fff; 
+        color: var(--bg);
+        box-shadow: 0 0 60px rgba(255,255,255,0.1); 
+      }
+      .btn-secondary {
+        display: inline-block;
+        padding: 14px 36px;
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.25);
+        color: rgba(255,255,255,0.9);
+        text-decoration: none;
+        font-family: var(--body);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: all 0.4s;
+        cursor: pointer;
+      }
+      .btn-secondary:hover {
+        border-color: #fff;
+        color: #fff;
+      }
+      .btn-icon {
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(255,255,255,0.2);
+        background: transparent;
+        color: rgba(255,255,255,0.75);
+        font-family: var(--body);
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }
+      .btn-icon:hover {
+        border-color: var(--saffron);
+        color: var(--saffron);
+        box-shadow: 0 0 15px rgba(218,165,32,0.1);
+      }
       @keyframes rippleExpand { 0% { width: 0; height: 0; opacity: 1; } 100% { width: 400px; height: 400px; opacity: 0; } }
       @keyframes ripple { 0% { width: 0; height: 0; opacity: 1; } 100% { width: 400px; height: 400px; opacity: 0; } }
 

@@ -95,18 +95,14 @@ function RotatingAlbum({ items }) {
 
       {/* Controls */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "28px", marginTop: "32px" }}>
-        <button data-magnetic onClick={prev} style={{ width: "44px", height: "44px", border: "1px solid rgba(255,255,255,0.2)", background: "transparent", color: "rgba(255,255,255,0.75)", fontFamily: "var(--body)", fontSize: "16px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s" }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--saffron)"; e.currentTarget.style.color = "var(--saffron)"; e.currentTarget.style.boxShadow = "0 0 15px rgba(218,165,32,0.1)"; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; e.currentTarget.style.color = "rgba(255,255,255,0.75)"; e.currentTarget.style.boxShadow = "none"; }}>←</button>
+        <button data-magnetic onClick={prev} className="btn-icon">←</button>
 
         <div style={{ textAlign: "center", minWidth: "200px" }}>
           <div style={{ fontFamily: "var(--display)", fontSize: "18px", fontWeight: 600, color: "#fff", marginBottom: "4px" }}>{active.label}</div>
           <div style={{ fontFamily: "var(--body)", fontSize: "11px", color: "rgba(255,255,255,0.5)", letterSpacing: "2px" }}>{active.isVideo ? "▶ VIDEO" : active.cat.toUpperCase()} · {current + 1} / {total}</div>
         </div>
 
-        <button data-magnetic onClick={next} style={{ width: "44px", height: "44px", border: "1px solid rgba(255,255,255,0.2)", background: "transparent", color: "rgba(255,255,255,0.75)", fontFamily: "var(--body)", fontSize: "16px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s" }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--saffron)"; e.currentTarget.style.color = "var(--saffron)"; e.currentTarget.style.boxShadow = "0 0 15px rgba(218,165,32,0.1)"; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; e.currentTarget.style.color = "rgba(255,255,255,0.75)"; e.currentTarget.style.boxShadow = "none"; }}>→</button>
+        <button data-magnetic onClick={next} className="btn-icon">→</button>
       </div>
 
       {/* Dots */}
@@ -156,7 +152,7 @@ export default function MyWork() {
             <span style={{ color: "var(--saffron)", opacity: loaded ? 1 : 0, transition: "opacity 0.5s 0.8s" }}>.</span>
           </h1>
           <p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.75)", opacity: loaded ? 1 : 0, transition: "all 0.8s 0.9s" }}>
-            Campaign assets, brand systems, presentations, social media, and video — the visual output of a strategist who thinks in systems and executes with precision.
+            A selection of my recent campaigns, brand designs, and strategic deliverables.
           </p>
         </div>
       </section>
@@ -200,9 +196,7 @@ export default function MyWork() {
         <Reveal>
           <div style={{ padding: "56px", textAlign: "center", maxWidth: "900px", margin: "0 auto", background: "rgba(12,10,8,0.5)", backdropFilter: "blur(16px) saturate(140%)", border: "1px solid rgba(255,255,255,0.15)", boxShadow: "0 10px 40px rgba(0,0,0,0.2)", position: "relative", zIndex: 2 }}>
             <div style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 600, color: "#fff", margin: "0 0 16px" }}>Interested in working together<span style={{ color: "var(--saffron)" }}>?</span></div>
-            <a href="mailto:gagan.97@gmail.com" data-magnetic style={{ display: "inline-block", padding: "14px 36px", background: "var(--saffron)", color: "var(--bg)", textDecoration: "none", fontFamily: "var(--body)", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", transition: "all 0.4s", boxShadow: "0 0 30px rgba(218,165,32,0.12)" }}
-              onMouseEnter={e => { e.target.style.background = "#fff"; e.target.style.boxShadow = "0 0 50px rgba(255,255,255,0.08)"; }}
-              onMouseLeave={e => { e.target.style.background = "var(--saffron)"; e.target.style.boxShadow = "0 0 30px rgba(218,165,32,0.12)"; }}>Get In Touch</a>
+            <a href="mailto:gagan.97@gmail.com" data-magnetic className="btn-primary">Get In Touch</a>
           </div>
         </Reveal>
       </section>

@@ -77,24 +77,14 @@ function Hero() {
           fontFamily: "var(--body)", fontSize: "clamp(14px, 1.8vw, 18px)", fontWeight: 400,
           color: "rgba(255,255,255,0.75)", maxWidth: "540px", lineHeight: 1.8, margin: "20px 0 44px",
         }}>
-          Growth strategist. Marketing analytician. Data-driven storyteller.
-          <br />I don't just read the market — <span style={{ color: "var(--saffron)", fontWeight: 600 }}>I move it</span>.
+          Growth strategist. Marketing analyst. Data-driven storyteller.
+          <br />I turn complex data into clear strategies that drive <span style={{ color: "var(--saffron)", fontWeight: 600 }}>measurable growth</span>.
         </div>
 
         {/* CTAs with ripple effect */}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(30px)", transition: "all 0.9s cubic-bezier(0.16,1,0.3,1) 1.6s" }}>
-          <a href="/my-marketing-work" data-magnetic className="btn-primary" style={{
-            position: "relative", overflow: "hidden",
-            padding: "14px 36px", background: "var(--saffron)", color: "var(--bg)", textDecoration: "none",
-            fontFamily: "var(--body)", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
-            transition: "all 0.4s", boxShadow: "0 0 30px rgba(218,165,32,0.15)",
-          }}>Explore My Work</a>
-          <a href="#contact" data-magnetic style={{
-            padding: "14px 36px", background: "transparent", border: "1px solid rgba(255,255,255,0.25)",
-            color: "rgba(255,255,255,0.9)", textDecoration: "none",
-            fontFamily: "var(--body)", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
-            transition: "all 0.4s",
-          }}>Contact</a>
+          <a href="/my-marketing-work" data-magnetic className="btn-primary">Explore My Work</a>
+          <a href="#contact" data-magnetic className="btn-secondary">Contact</a>
         </div>
       </div>
 
@@ -180,7 +170,7 @@ function About() {
         <Reveal delay={0.15}>
           <div>
             <p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.85, color: "rgba(255,255,255,0.8)", margin: "0 0 24px" }}>
-              I'm a data-driven marketer who operates at the intersection of growth strategy, analytics, and finance. I don't just look at numbers — I decode the <em style={{ color: "var(--saffron)", fontStyle: "italic" }}>why</em> behind human behavior, then architect systems that turn those insights into scalable growth.
+              I'm a data-driven marketer who operates at the intersection of growth strategy, analytics, and finance. I focus on understanding user behavior underneath the numbers, and building systems that turn those insights into scalable growth.
             </p>
             <p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.85, color: "rgba(255,255,255,0.8)", margin: "0 0 32px" }}>
               My perspective is shaped by three cultures: German engineering precision, Indian entrepreneurial intensity, and American tech-forward ambition. That global lens is my competitive advantage.
@@ -223,7 +213,7 @@ function Experience() {
         <Reveal>
           <div style={{ display: "flex", alignItems: "baseline", gap: "20px", marginBottom: "60px" }}>
             <span style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "var(--steel)" }}>002</span>
-            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(32px, 4vw, 50px)", fontWeight: 600, color: "#fff", letterSpacing: "-1.5px", margin: 0 }}>Career <span style={{ color: "var(--steel)" }}>Intelligence</span></h2>
+            <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(32px, 4vw, 50px)", fontWeight: 600, color: "#fff", letterSpacing: "-1.5px", margin: 0 }}>Professional <span style={{ color: "var(--steel)" }}>Experience</span></h2>
           </div>
         </Reveal>
 
@@ -363,7 +353,7 @@ function Skills() {
           <Reveal>
             <div style={{ display: "flex", alignItems: "baseline", gap: "20px" }}>
               <span style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "var(--lime)" }}>003</span>
-              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(32px, 4vw, 50px)", fontWeight: 600, color: "#fff", letterSpacing: "-1.5px", margin: 0 }}>Arsenal<span style={{ color: "var(--lime)" }}>.</span></h2>
+              <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(32px, 4vw, 50px)", fontWeight: 600, color: "#fff", letterSpacing: "-1.5px", margin: 0 }}>Skills<span style={{ color: "var(--lime)" }}> &amp; Tools</span></h2>
             </div>
           </Reveal>
         </div>
@@ -476,12 +466,12 @@ function Contact() {
         <Reveal><div style={{ fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "var(--saffron)", marginBottom: "20px" }}>005 · Contact</div></Reveal>
         <Reveal delay={0.1}>
           <h2 style={{ fontFamily: "var(--display)", fontSize: "clamp(32px, 5vw, 60px)", fontWeight: 600, color: "#fff", lineHeight: 1.1, letterSpacing: "-2px", margin: "0 0 20px" }}>
-            The next move<br />is <span style={{ WebkitTextStroke: "1.5px var(--saffron)", color: "transparent" }}>yours</span>.
+            Let's <span style={{ WebkitTextStroke: "1.5px var(--saffron)", color: "transparent" }}>Connect</span>.
           </h2>
         </Reveal>
-        <Reveal delay={0.2}><p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.8, color: "rgba(255,255,255,0.75)", margin: "0 0 40px" }}>Whether you need a growth strategist, a data-minded marketer, or someone who sees the whole board — let's talk.</p></Reveal>
+        <Reveal delay={0.2}><p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.8, color: "rgba(255,255,255,0.75)", margin: "0 0 40px" }}>Whether you need a growth strategist, a data analyst, or a marketing leader — let's talk.</p></Reveal>
         <Reveal delay={0.3}>
-          <a href="mailto:gagan.97@gmail.com" data-magnetic style={{ display: "inline-block", padding: "16px 44px", background: "var(--saffron)", color: "var(--bg)", textDecoration: "none", fontFamily: "var(--body)", fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px", transition: "all 0.4s", boxShadow: "0 0 40px rgba(218,165,32,0.15)" }} onMouseEnter={e => { e.target.style.background = "#fff"; e.target.style.boxShadow = "0 0 60px rgba(255,255,255,0.1)"; }} onMouseLeave={e => { e.target.style.background = "var(--saffron)"; e.target.style.boxShadow = "0 0 40px rgba(218,165,32,0.15)"; }}>
+          <a href="mailto:gagan.97@gmail.com" data-magnetic className="btn-primary" style={{ padding: "16px 44px", fontSize: "13px", letterSpacing: "1.5px", textTransform: "none" }}>
             gagan.97@gmail.com
           </a>
           <div style={{ marginTop: "16px", fontFamily: "var(--body)", fontSize: "14px", color: "rgba(255,255,255,0.5)" }}>+1 (774) 290-3032</div>
