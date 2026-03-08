@@ -15,28 +15,27 @@ import { Preloader, MagneticCursor, GradientMesh, Reveal, TiltCard, KolamMotif, 
 export default function MyBlog() {
   const [loaded, setLoaded] = useState(false);
   const [feedLoaded, setFeedLoaded] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [error, setError] = useState(null);
+
   const scrollY = useScroll();
   const onDone = useCallback(() => setLoaded(true), []);
 
   useEffect(() => {
-    const existingScript = document.getElementById("rssapp-script");
-    if (!existingScript) {
-      const script = document.createElement("script");
-      script.src = "https://widget.rss.app/v1/wall.js";
-      script.id = "rssapp-script";
-      script.async = true;
-      script.onload = () => {
-        // Give the widget a moment to render before fading out skeleton
-        setTimeout(() => setFeedLoaded(true), 1200);
-      };
-      document.body.appendChild(script);
-    } else {
-      setTimeout(() => setFeedLoaded(true), 800);
-    }
-
-    return () => {
-      // We don't necessarily want to remove the script as subsequent mounts might need it
-    };
+    fetch('/api/medium')
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch');
+        return res.json();
+      })
+      .then(data => {
+        setPosts(data.posts || []);
+        setFeedLoaded(true);
+      })
+      .catch(err => {
+        console.error('Error loading feed', err);
+        setError(err.message);
+        setFeedLoaded(true);
+      });
   }, []);
 
   const parallaxSlow = scrollY * 0.12;
@@ -213,9 +212,44 @@ export default function MyBlog() {
               position: "relative",
               zIndex: 15,
               minHeight: feedLoaded ? "auto" : "800px",
-              display: "block"
+              display: "block",
+              padding: feedLoaded ? "20px" : "0px",
             }}>
-              <rssapp-wall id="Am3kjPWYpKWqVRPv"></rssapp-wall>
+              {!feedLoaded && !error ? null : error ? (
+                <div style={{ color: 'var(--saffron)', textAlign: 'center', padding: '40px', fontFamily: 'var(--body)' }}>
+                  Unable to load blog feed. Please check back later.
+                </div>
+              ) : (
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "24px" }}>
+                  {posts.map((post, i) => (
+                    <a key={i} href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", display: "flex", flexDirection: "column", height: "100%" }}>
+                      <TiltCard glowColor="var(--saffron)" style={{ flex: 1, padding: 0, display: 'flex', flexDirection: 'column' }}>
+                        {post.thumbnail && (
+                          <div style={{ width: '100%', height: '220px', overflow: 'hidden' }}>
+                            <img src={post.thumbnail} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
+                              onMouseEnter={e => e.target.style.transform = 'scale(1.05)'}
+                              onMouseLeave={e => e.target.style.transform = 'scale(1)'} />
+                          </div>
+                        )}
+                        <div style={{ padding: "24px", display: "flex", flexDirection: "column", flex: 1 }}>
+                          <div style={{ fontFamily: "var(--body)", fontSize: "11px", color: "var(--saffron)", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "12px" }}>
+                            {new Date(post.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </div>
+                          <h3 style={{ fontFamily: "var(--display)", fontSize: "22px", fontWeight: "600", color: "#fff", margin: "0 0 16px", lineHeight: "1.3" }}>
+                            {post.title}
+                          </h3>
+                          <p style={{ fontFamily: "var(--body)", fontSize: "14px", color: "rgba(255,255,255,0.7)", lineHeight: "1.6", margin: "0 0 24px", flex: 1 }}>
+                            {post.snippet}
+                          </p>
+                          <div style={{ fontFamily: "var(--body)", fontSize: "12px", fontWeight: "600", color: "var(--lime)", letterSpacing: "1px", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "6px" }}>
+                            Read More <svg width="12" height="12" viewBox="0 0 12 12"><path d="M1 6 L11 6 M7 2 L11 6 L7 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                          </div>
+                        </div>
+                      </TiltCard>
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </Reveal>
