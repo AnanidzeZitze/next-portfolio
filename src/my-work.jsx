@@ -1,123 +1,106 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
 
-import { useScroll, useInView } from "./hooks/index.js";
-import { Preloader, MagneticCursor, GradientMesh, Reveal, Nav, Footer, GlobalStyles, KolamMotif } from "./components/shared.jsx";
+import { useScroll } from "./hooks/index.js";
+import { Preloader, MagneticCursor, GradientMesh, Nav, Footer, GlobalStyles, KolamMotif } from "./components/shared.jsx";
+import "./styles/my-work.css";
 
-// ═══ WORK DATA ═══
-const workItems = [
-  { id: 2, src: "https://www.canva.com/design/DAHCAqMbZH4/ASpcxFtxqxEV3-Jz4b7h6w/view?embed", pt: "125%", cat: "brand", label: "Brand & Product Ad Posters" },
-  { id: 1, src: "https://www.canva.com/design/DAGLEsPv4ao/F_EulhoPHsraplU9TC8FtA/view?embed", pt: "128.5714%", cat: "brand", label: "T-Shirt Design" },
-  { id: 3, src: "https://www.canva.com/design/DAG5rS9JOEc/jJYYa0bVd9q8veEdt4TNLg/view?embed", pt: "56.25%", cat: "deck", label: "Youtube Banner Design" },
-  { id: 4, src: "https://www.canva.com/design/DAG7tCx9plQ/Bv7Kf1TlUJIt78FyGvizEg/watch?embed", pt: "50%", cat: "print", label: "Christmas Letters", isVideo: true },
-  { id: 5, src: "https://www.canva.com/design/DAGyU3P5J_Y/UuCAEVLag78R9YRwAgZ8Zg/view?embed", pt: "141.4286%", cat: "print", label: "Thank You Letters" },
-  { id: 6, src: "https://www.canva.com/design/DAG0Qw4K2do/dSOZrmMNV2PqsghR83hQXQ/view?embed", pt: "141.4358%", cat: "print", label: "Newsletter & Marketing Flyer" },
-  { id: 7, src: "https://www.canva.com/design/DAFZH7_qfpg/6woZaYRzBsp03QqtuLaflw/view?embed", pt: "100%", cat: "social", label: "Social Campaign" },
-  { id: 8, src: "https://www.canva.com/design/DAG5MO6tClY/_5gbpEhg8KHwmp4cd_xpfA/view?embed", pt: "100%", cat: "social", label: "Brand Design" },
-  { id: 9, src: "https://www.canva.com/design/DAG4bnevDMU/MZBB5xmIaMafGXcRbyPfAg/view?embed", pt: "141.4286%", cat: "print", label: "Thank You Letter" },
-  { id: 10, src: "https://www.canva.com/design/DAG-KUs2YxI/Og5LB8SA4VUPnMRgYuFFag/view?embed", pt: "140.9524%", cat: "print", label: "Forum Invite" },
-  { id: 11, src: "https://www.canva.com/design/DAGqF1Fb9Ts/1kmsTMnlZS9hUtgKiWgDPw/watch?embed", pt: "100%", cat: "video", label: "Promo Video", isVideo: true },
-  { id: 12, src: "https://www.canva.com/design/DAG-PMZnCuE/6G9WQmTXYnQTYI2rUCT_Zw/view?embed", pt: "140%", cat: "campaign", label: "Forum Invites" },
-  { id: 13, src: "https://www.canva.com/design/DAG0Q3cGQ4k/HRU2RsddslTSAB872PIjuA/view?embed", pt: "12.3626%", cat: "campaign", label: "Ad Banner Set" },
-  { id: 14, src: "https://www.canva.com/design/DAG6Y11qJtE/-WIOJ8XRVWCfeHXg-O2PrQ/view?embed", pt: "133.3333%", cat: "brand", label: "Christmas Letter & Forum Invite" },
-  { id: 15, src: "https://www.canva.com/design/DAG0U77Mu9w/QFf4PukDdkPyfJvq4qGXeQ/view?embed", pt: "125%", cat: "brand", label: "Product Ad Posters" },
+// ═══ ASSETS (public/work) ═══
+const w = (f) => `/work/${f}`;
+
+const mosaic = [
+  "ai-generated-ai-gen-1.jpg", "social-media-image-drnaik-beautyserums.jpg", "design-concepts-t-shirt-design-2-instire-clothing-1.jpg",
+  "print-forum-poster-gkf-1.jpg", "ai-generated-ai-powered-posts-1.jpg", "social-media-image-ceramic-sink.jpg",
+  "logo-design-petrizllc-logo-1.jpg", "ai-generated-ai-gen-2.jpg", "social-media-image-ppfluids-social-1.jpg",
+  "design-concepts-t-shirt-design-2-instire-clothing-21.jpg", "ai-generated-ai-powered-posts-10.jpg", "print-gkf-forum-primary-invite-1.jpg",
+  "ai-generated-ai-gen-3.jpg", "design-concepts-t-shirt-design-2-instire-clothing-22.jpg", "ai-generated-ai-powered-posts-2.jpg",
+  "social-media-image-aesthetic-republic-day-flyer.jpg", "design-concepts-t-shirt-design-2-instire-clothing-28.jpg", "ai-generated-ai-gen-4.jpg",
 ];
 
-const cats = [
-  { key: "all", label: "All Work" }, { key: "brand", label: "Brand" }, { key: "print", label: "Print" },
-  { key: "social", label: "Social" }, { key: "campaign", label: "Campaign" },
-  { key: "deck", label: "Deck" }, { key: "video", label: "Video" },
+const categories = [
+  { id: "social", t: "Social media & ads", d: "Posts, reels and banners for small brands", bg: "#14202e", fan: ["social-media-image-ceramic-sink.jpg", "social-media-image-drnaik-beautyserums.jpg", "social-media-image-ppfluids-social-1.jpg"] },
+  { id: "ai", t: "AI creative", d: "Posters and spec ads made with AI tools", bg: "#1d1729", fan: ["ai-generated-ai-gen-2.jpg", "ai-generated-ai-gen-1.jpg", "ai-generated-ai-gen-3.jpg"] },
+  { id: "identity", t: "Brand identity", d: "Marks for Petriz, BloggEd, Instire, VesperVox", bg: "#132620", fan: ["logo-design-blogge-logo-blogged-logo.jpg", "logo-design-petrizllc-logo-1.jpg", "logo-design-vespervox-logo-1.jpg"], kind: "sq" },
+  { id: "apparel", t: "Apparel graphics", d: "T-shirt concepts for Instire Clothing", bg: "#2a1c0c", fan: ["design-concepts-t-shirt-design-2-instire-clothing-21.jpg", "design-concepts-t-shirt-design-2-instire-clothing-1.jpg", "design-concepts-t-shirt-design-2-instire-clothing-22.jpg"] },
+  { id: "print", t: "Print & editorial", d: "Forum posters, invites, letters, newsletters", bg: "#2a1219", fan: ["print-gkf-forum-primary-invite-1.jpg", "print-forum-poster-gkf-1.jpg", "print-petropath-newsletter-1.jpg"] },
+  { id: "data", t: "Data visualization", d: "Marketing and sales dashboards in Tableau", bg: "#111014", fan: ["tableau-dashboard-1.jpg", "tableau-campaign-performance-dashboard.jpg", "tableau-customer-order-db.jpg"], kind: "wide" },
 ];
 
-// ═══ ROTATING ALBUM ═══
-function RotatingAlbum({ items }) {
-  const [current, setCurrent] = useState(0);
-  const [dir, setDir] = useState(0);
-  const [anim, setAnim] = useState(false);
-  const [loaded, setLoaded] = useState({});
+const social = [
+  { video: "video-instire-new-drop.mp4", poster: "video-instire-new-drop-poster.jpg", t: "Instire — New Drop", s: "Reel" },
+  { img: "social-media-image-drnaik-beautyserums.jpg", t: "Dr Naik — Beauty Serums", s: "Product launch post" },
+  { video: "video-moksha-creations.mp4", poster: "video-moksha-creations-poster.jpg", t: "Moksha Creations", s: "Reel" },
+  { img: "social-media-image-mokshacreations-epoxy-resin.jpg", t: "Moksha Creations — Epoxy Resin", s: "Story" },
+  { img: "social-media-image-ceramic-sink.jpg", t: "Ceramic Sink — New Arrival", s: "Product post" },
+  { video: "video-mokshacreations-countdown.mp4", poster: "video-mokshacreations-countdown-poster.jpg", t: "Flash Sale Countdown", s: "Animated post" },
+  { img: "social-media-image-ppfluids-social-1.jpg", t: "PP Fluids — Solid Control", s: "B2B social post" },
+  { img: "social-media-image-ppfluids-social-2.jpg", t: "PP Fluids — HDD Solutions", s: "B2B social post" },
+  { video: "video-instire.mp4", poster: "video-instire-poster.jpg", t: "@instire", s: "Reel" },
+  { img: "social-media-image-aesthetic-republic-day-flyer.jpg", t: "Republic Day", s: "Festive flyer" },
+];
 
-  useEffect(() => { setCurrent(0); setLoaded({}); }, [items.length, items[0]?.id]);
+const banners = [
+  ["social-media-image-ad-banners-awareness-banner.jpg", "Awareness"],
+  ["social-media-image-ad-banners-reach-banner.jpg", "Reach"],
+  ["social-media-image-ad-banners-product-focused-banner.jpg", "Product focus"],
+  ["social-media-image-ad-banners-coversion-focus-banner.jpg", "Conversion"],
+];
 
-  const total = items.length;
-  if (!total) return <div style={{ padding: "80px", textAlign: "center", fontFamily: "var(--body)", color: "rgba(255,255,255,0.6)" }}>No items in this category</div>;
+const aiPosters = [
+  ["ai-generated-ai-gen-1.jpg", "Content Visual poster"], ["ai-generated-ai-gen-2.jpg", "Impact poster"], ["ai-generated-ai-gen-3.jpg", "Universe poster"],
+  ["ai-generated-ai-gen-4.jpg", "Imagining poster"], ["ai-generated-ai-gen-5.jpg", "Rocket poster"], ["ai-generated-ai-gen-6.jpg", "Potential poster"],
+];
 
-  const go = (idx) => {
-    if (anim || idx === current) return;
-    setDir(idx > current ? 1 : -1);
-    setAnim(true);
-    setTimeout(() => { setCurrent(idx); setAnim(false); }, 400);
-  };
-  const prev = () => go((current - 1 + total) % total);
-  const next = () => go((current + 1) % total);
-  const pIdx = (current - 1 + total) % total;
-  const nIdx = (current + 1) % total;
-  const active = items[current];
+const specAds = [
+  ["ai-generated-ai-powered-posts-7.jpg", "Herbal liqueur spec ad", true],
+  ["ai-generated-ai-powered-posts-2.jpg", "Sports car spec ad"],
+  ["ai-generated-ai-powered-posts-6.jpg", "Burger spec ad"],
+  ["ai-generated-ai-powered-posts-4.jpg", "Luxury car spec ad"],
+  ["ai-generated-ai-powered-posts-1.jpg", "Supercar spec ad"],
+  ["ai-generated-ai-powered-posts-10.jpg", "Sneaker spec ad"],
+  ["ai-generated-ai-powered-posts-3.jpg", "Yellow supercar spec ad"],
+  ["ai-generated-ai-powered-posts-12.jpg", "Foldable phone spec ad", true],
+  ["ai-generated-ai-powered-posts-5.jpg", "Grand tourer spec ad"],
+  ["ai-generated-ai-powered-posts-9.jpg", "Basketball sneaker spec ad"],
+];
 
-  // Side card component
-  const SideCard = ({ idx, side }) => (
-    <div data-magnetic onClick={side === "left" ? prev : next} style={{
-      position: "absolute", [side]: "1%", width: "240px", height: "340px",
-      transform: `rotateY(${side === "left" ? 28 : -28}deg) translateZ(-120px) scale(0.8)`,
-      opacity: anim ? 0.1 : 0.3, filter: "blur(1px) brightness(0.5)",
-      transition: "all 0.5s cubic-bezier(0.16,1,0.3,1)",
-      cursor: "pointer", zIndex: 1, overflow: "hidden",
-      border: "1px solid rgba(255,255,255,0.15)", background: "var(--bg)",
-    }}>
-      <iframe src={items[idx].src} style={{ width: "100%", height: "100%", border: "none", pointerEvents: "none" }} loading="lazy" />
-    </div>
-  );
+const logos = [
+  ["logo-design-petrizllc-logo-1.jpg", "Petriz LLC", "Oilfield specialists · primary mark"],
+  ["logo-design-petrizllc-logo-3.jpg", "Petriz LLC", "Mono variant"],
+  ["logo-design-blogge-logo-blogged-logo.jpg", "BloggEd", "Blog wordmark"],
+  ["logo-design-instireclothing-logo-1.jpg", "Instire Clothing", "Apparel brand mark"],
+  ["logo-design-vespervox-logo-1.jpg", "VesperVox", "Neon monogram"],
+  ["logo-design-vespervox-logo-2.jpg", "VesperVox", "Wordmark"],
+];
 
+const tees = [
+  ["design-concepts-t-shirt-design-2-instire-clothing-1.jpg", "Savage tiger"], ["design-concepts-t-shirt-design-2-instire-clothing-10.jpg", "Work Hard Stay Humble"],
+  ["design-concepts-t-shirt-design-2-instire-clothing-16.jpg", "Lost in the Woods"], ["design-concepts-t-shirt-design-2-instire-clothing-21.jpg", "I'm Not Old, I'm Classic"],
+  ["design-concepts-t-shirt-design-2-instire-clothing-22.jpg", "Gym"], ["design-concepts-t-shirt-design-2-instire-clothing-28.jpg", "Floral heart"],
+  ["design-concepts-t-shirt-design-2-instire-clothing-30.jpg", "She Believed"], ["design-concepts-t-shirt-design-2-instire-clothing-13.jpg", "Full of Rock"],
+  ["design-concepts-t-shirt-design-instire-clothing-1.jpg", "Vibe With Music"], ["design-concepts-t-shirt-design-instire-clothing-12.jpg", "Drummer"],
+  ["design-concepts-t-shirt-design-instire-clothing-14.jpg", "Summer Vibes"], ["design-concepts-t-shirt-design-instire-clothing-15.jpg", "Beast Mode"],
+  ["design-concepts-t-shirt-design-instire-clothing-5.jpg", "Music Is Life"], ["design-concepts-t-shirt-design-instire-clothing-6.jpg", "Shred the Silence"],
+];
+
+const printCols = [
+  { cls: "ps", items: [["print-forum-poster-gkf-1.jpg", "GKF forum poster"], ["print-gkf-forum-primary-invite-1.jpg", "GKF forum primary invite"], ["print-petropath-newsletter-1.jpg", "Petropath newsletter page 1"]] },
+  { cls: "pf", offset: true, items: [["print-forum-poster-gkf-2.jpg", "GKF holiday poster"], ["print-thankyou-letters-design-gkf-1.jpg", "GKF thank-you letter"], ["print-petropath-newsletter-2.jpg", "Petropath newsletter page 2"]] },
+  { cls: "ps", items: [["print-gkf-forum-secondary-invites-1.jpg", "GKF forum secondary invite"], ["print-gkf-forum-primary-invite-2.jpg", "GKF forum invite, page 2"], ["print-board-member-christmas-letter-1-1.jpg", "Board member Christmas letter"]] },
+];
+
+const dashboards = [
+  ["tableau-campaign-performance-dashboard.jpg", "Digital Campaign Performance", "https://public.tableau.com/app/profile/gagan.bhaskar.naik/viz/DigitalCampaignPerformanceDashboard/CampaignPerformanceDashboard"],
+  ["tableau-customer-order-db.jpg", "E-Commerce Orders & Product Sales", "https://public.tableau.com/app/profile/gagan.bhaskar.naik/viz/E-CommerceConsumerOrdersProductSalesReport/CostomerOrderDB"],
+  ["tableau-dashboard-1.jpg", "Marketing Dashboard", "https://public.tableau.com/app/profile/gagan.bhaskar.naik/viz/MarketingDashboard-1_17495926496190/Dashboard1"],
+];
+
+const tools = ["Canva", "Adobe Photoshop", "Adobe Illustrator", "Adobe InDesign", "Adobe Premiere Pro", "Adobe After Effects", "Adobe Lightroom", "Adobe Express", "Tableau", "AI image tools"];
+
+function Head({ id, title, sub, children }) {
   return (
-    <div style={{ position: "relative" }}>
-      {/* Stage */}
-      <div style={{ perspective: "1200px", height: "520px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
-        {total > 1 && <SideCard idx={pIdx} side="left" />}
-
-        {/* CENTER */}
-        <div key={active.id} style={{
-          width: "min(540px, 82vw)", height: "480px", position: "relative", zIndex: 10,
-          transform: anim ? `translateX(${dir * -80}px) scale(0.92) rotateY(${dir * -10}deg)` : "none",
-          opacity: anim ? 0.2 : 1,
-          transition: "all 0.5s cubic-bezier(0.16,1,0.3,1)",
-          boxShadow: "0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(218,165,32,0.12), 0 0 60px rgba(218,165,32,0.05)",
-          overflow: "hidden", background: "var(--bg)",
-        }}>
-          {!loaded[active.id] && (
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.02) 75%)", backgroundSize: "200% 100%", animation: "shimmer 1.5s infinite", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ fontFamily: "var(--body)", fontSize: "10px", color: "rgba(255,255,255,0.4)", letterSpacing: "3px", textTransform: "uppercase" }}>Loading</div>
-            </div>
-          )}
-          <iframe src={active.src} onLoad={() => setLoaded(p => ({ ...p, [active.id]: true }))} style={{ width: "100%", height: "100%", border: "none", opacity: loaded[active.id] ? 1 : 0, transition: "opacity 0.4s" }} loading="lazy" allowFullScreen allow="fullscreen" />
-          {active.isVideo && <div style={{ position: "absolute", top: "12px", right: "12px", padding: "5px 12px", background: "rgba(8,6,4,0.8)", backdropFilter: "blur(10px)", border: "1px solid rgba(184,212,53,0.25)", fontFamily: "var(--body)", fontSize: "9px", fontWeight: 700, color: "var(--lime)", letterSpacing: "2px", textTransform: "uppercase" }}>▶ Video</div>}
-        </div>
-
-        {total > 1 && <SideCard idx={nIdx} side="right" />}
-      </div>
-
-      {/* Controls */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "28px", marginTop: "32px" }}>
-        <button data-magnetic onClick={prev} className="btn-icon">←</button>
-
-        <div style={{ textAlign: "center", minWidth: "200px" }}>
-          <div style={{ fontFamily: "var(--display)", fontSize: "18px", fontWeight: 600, color: "#fff", marginBottom: "4px" }}>{active.label}</div>
-          <div style={{ fontFamily: "var(--body)", fontSize: "11px", color: "rgba(255,255,255,0.5)", letterSpacing: "2px" }}>{active.isVideo ? "▶ VIDEO" : active.cat.toUpperCase()} · {current + 1} / {total}</div>
-        </div>
-
-        <button data-magnetic onClick={next} className="btn-icon">→</button>
-      </div>
-
-      {/* Dots */}
-      {total > 1 && (
-        <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginTop: "20px", flexWrap: "wrap" }}>
-          {items.map((_, i) => (
-            <button key={i} onClick={() => go(i)} data-magnetic style={{
-              width: current === i ? "24px" : "6px", height: "6px", borderRadius: "3px", border: "none",
-              background: current === i ? "var(--saffron)" : "rgba(255,255,255,0.25)",
-              boxShadow: current === i ? "0 0 10px rgba(218,165,32,0.2)" : "none",
-              cursor: "pointer", transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)", padding: 0,
-            }} />
-          ))}
-        </div>
-      )}
+    <div className="mw-head">
+      <h2 id={id} className="mw-h2 a fu">{title}</h2>
+      {children || <p className="mw-sub a fi">{sub}</p>}
     </div>
   );
 }
@@ -125,10 +108,8 @@ function RotatingAlbum({ items }) {
 // ═══ MAIN ═══
 export default function MyWork() {
   const [loaded, setLoaded] = useState(false);
-  const [filter, setFilter] = useState("all");
   const onDone = useCallback(() => setLoaded(true), []);
   const scrollY = useScroll();
-  const filtered = filter === "all" ? workItems : workItems.filter(w => w.cat === filter);
 
   return (
     <>
@@ -138,68 +119,197 @@ export default function MyWork() {
       {loaded && <MagneticCursor />}
       <GradientMesh />
       <Nav
-        links={[{ href: "/", label: "Home" }, { href: "/my-marketing-work", label: "Work", active: true }, { href: "/my-marketing-blog", label: "Blog" }]}
+        links={[{ href: "/", label: "Home" }, { href: "/my-marketing-work", label: "Work", active: true }, { href: "https://gbnmarketing.blogspot.com/", label: "Blog" }]}
       />
+      <div className="mw-bar" aria-hidden="true" />
 
       {/* HERO */}
-      <section style={{ padding: "160px var(--px) 60px", position: "relative", overflow: "hidden" }}>
+      <section style={{ padding: "160px var(--px) 100px", position: "relative", overflow: "hidden" }}>
         <KolamMotif size={400} style={{ position: "absolute", top: "-60px", right: "-60px", transform: `translateY(${scrollY * 0.12}px)` }} />
-        <div style={{ position: "relative", maxWidth: "700px" }}>
+        <div style={{ position: "relative", maxWidth: "760px" }}>
           <div style={{ opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(20px)", transition: "all 0.8s 0.2s", fontFamily: "var(--body)", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", color: "var(--saffron)", marginBottom: "16px" }}>Portfolio</div>
           <h1 style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: "clamp(44px, 6vw, 76px)", lineHeight: 1.05, letterSpacing: "-2px", color: "#fff", margin: "0 0 16px" }}>
-            {"My ".split("").map((c, i) => <span key={i} style={{ display: "inline-block", opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(80px) rotate(5deg)", transition: `all 0.7s cubic-bezier(0.16,1,0.3,1) ${0.4 + i * 0.04}s`, filter: loaded ? "none" : "blur(3px)" }}>{c === " " ? "\u00A0" : c}</span>)}
+            {"My ".split("").map((c, i) => <span key={i} style={{ display: "inline-block", opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(80px) rotate(5deg)", transition: `all 0.7s cubic-bezier(0.16,1,0.3,1) ${0.4 + i * 0.04}s`, filter: loaded ? "none" : "blur(3px)" }}>{c === " " ? " " : c}</span>)}
             {"Work".split("").map((c, i) => <span key={i} style={{ display: "inline-block", opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(80px) rotate(-5deg)", transition: `all 0.7s cubic-bezier(0.16,1,0.3,1) ${0.55 + i * 0.04}s`, filter: loaded ? "none" : "blur(3px)", WebkitTextStroke: "1.5px var(--saffron)", color: "transparent" }}>{c}</span>)}
             <span style={{ color: "var(--saffron)", opacity: loaded ? 1 : 0, transition: "opacity 0.5s 0.8s" }}>.</span>
           </h1>
           <p style={{ fontFamily: "var(--body)", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.75)", opacity: loaded ? 1 : 0, transition: "all 0.8s 0.9s" }}>
-            A selection of my recent campaigns, brand designs, and strategic deliverables.
+            Design that makes ideas easy to feel and data easy to read — social campaigns, AI creative, brand identity, apparel, print and dashboards.
           </p>
         </div>
       </section>
 
-      {/* CATEGORY TABS */}
-      <section style={{ padding: "0 var(--px) 48px" }}>
-        <Reveal>
-          <div style={{ display: "flex", gap: "3px", flexWrap: "wrap", justifyContent: "center" }}>
-            {cats.map(c => {
-              const count = c.key === "all" ? workItems.length : workItems.filter(w => w.cat === c.key).length;
-              const isActive = filter === c.key;
-              return (
-                <button key={c.key} data-magnetic onClick={() => setFilter(c.key)} style={{
-                  padding: "12px 24px", border: "none", cursor: "pointer",
-                  fontFamily: "var(--body)", fontSize: "12px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase",
-                  background: isActive ? "var(--saffron)" : "rgba(255,255,255,0.05)",
-                  color: isActive ? "var(--bg)" : "rgba(255,255,255,0.7)",
-                  boxShadow: isActive ? "0 0 25px rgba(218,165,32,0.15), 0 0 0 1px var(--saffron)" : "0 0 0 1px rgba(255,255,255,0.15)",
-                  transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
-                  transform: isActive ? "translateY(-2px)" : "none",
-                }} onMouseEnter={e => { if (!isActive) { e.currentTarget.style.boxShadow = "0 0 0 1px rgba(218,165,32,0.3)"; e.currentTarget.style.color = "var(--saffron)"; } }}
-                  onMouseLeave={e => { if (!isActive) { e.currentTarget.style.boxShadow = "0 0 0 1px rgba(255,255,255,0.15)"; e.currentTarget.style.color = "rgba(255,255,255,0.7)"; } }}>
-                  {c.label}<span style={{ marginLeft: "6px", opacity: 0.5, fontSize: "10px" }}>{count}</span>
-                </button>
-              );
-            })}
+      <main className="mw">
+        {/* 19 · Selected Work */}
+        <section className="mw-pin" aria-label="Selected work">
+          <div className="mw-pin-in">
+            <div className="mw-pin-bg" aria-hidden="true">{mosaic.map((f, i) => <img key={i} src={w(f)} alt="" loading="lazy" />)}</div>
+            <p className="mw-eyebrow">Canva · Adobe Suite · AI · Tableau</p>
+            <h2 className="mw-pin-h">Selected <em>Work</em></h2>
+            <p className="mw-sub" style={{ color: "rgba(255,255,255,0.8)" }}>Social &amp; ads · AI creative · Brand identity · Apparel · Print · Data</p>
           </div>
-        </Reveal>
-      </section>
+        </section>
 
-      {/* ROTATING ALBUM */}
-      <section style={{ padding: "0 var(--px) 120px" }}>
-        <Reveal>
-          <RotatingAlbum items={filtered} />
-        </Reveal>
-      </section>
-
-      {/* CTA */}
-      <section style={{ padding: "0 var(--px) 120px", position: "relative" }}>
-        <KolamMotif size={350} color="var(--steel)" animate style={{ position: "absolute", right: "-100px", bottom: "0px", opacity: 0.08 }} />
-        <Reveal>
-          <div style={{ padding: "56px", textAlign: "center", maxWidth: "900px", margin: "0 auto", background: "rgba(12,10,8,0.5)", backdropFilter: "blur(16px) saturate(140%)", border: "1px solid rgba(255,255,255,0.15)", boxShadow: "0 10px 40px rgba(0,0,0,0.2)", position: "relative", zIndex: 2 }}>
-            <div style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 600, color: "#fff", margin: "0 0 16px" }}>Interested in working together<span style={{ color: "var(--saffron)" }}>?</span></div>
-            <a href="mailto:gagan.97@gmail.com" data-magnetic className="btn-primary">Get In Touch</a>
+        {/* 21 · What I make */}
+        <section className="mw-sec" aria-labelledby="mw-make">
+          <div className="mw-wrap">
+            <Head id="mw-make" title={<>What I <em>make</em></>} sub="Tap a card to jump to that work" />
+            <div className="mw-stack-list">
+              {categories.map((c, i) => (
+                <a key={c.id} href={`#${c.id}`} className="mw-stack" data-magnetic style={{ top: `${96 + i * 24}px`, background: c.bg }}>
+                  <span style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                    <span className="mw-stack-num">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="mw-stack-t">{c.t}</span>
+                    <span className="mw-stack-d">{c.d}</span>
+                  </span>
+                  <span className={`mw-fan ${c.kind || ""}`} aria-hidden="true">
+                    {c.fan.map(f => <img key={f} src={w(f)} alt="" loading="lazy" />)}
+                  </span>
+                </a>
+              ))}
+            </div>
           </div>
-        </Reveal>
-      </section>
+        </section>
+
+        {/* 20 · Social */}
+        <section id="social" className="mw-hg" aria-labelledby="mw-social">
+          <div className="mw-hg-in">
+            <div className="mw-wrap" style={{ width: "100%" }}>
+              <div className="mw-head" style={{ marginBottom: 0 }}>
+                <h2 id="mw-social" className="mw-h2">Social media <em>&amp;</em> ads</h2>
+                <p className="mw-sub">Posts and reels for small brands</p>
+              </div>
+            </div>
+            <div className="mw-hg-track">
+              {social.map(s => (
+                <figure key={s.t} className="mw-hg-card">
+                  {s.video
+                    ? <video className="mw-hg-media" src={w(s.video)} poster={w(s.poster)} autoPlay muted loop playsInline aria-label={s.t} />
+                    : <img className="mw-hg-media" src={w(s.img)} alt={s.t} loading="lazy" />}
+                  <figcaption style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                    <span className="mw-cap-t">{s.t}</span><span className="mw-cap-s">{s.s}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Display ads */}
+        <section className="mw-sec" aria-labelledby="mw-banners" style={{ paddingTop: "72px" }}>
+          <div className="mw-wrap">
+            <Head id="mw-banners" title="Display ad set" sub="One product, four campaign objectives — 728 × 90" />
+            <div className="mw-banners stagger">
+              {banners.map(([f, l]) => (
+                <figure key={f} className="mw-fig a fu">
+                  <img className="mw-pic" src={w(f)} alt={`${l} banner`} loading="lazy" style={{ borderRadius: "4px" }} />
+                  <figcaption className="mw-cap-s">{l}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 13 + 6 · AI creative */}
+        <section id="ai" className="mw-sec" aria-labelledby="mw-ai">
+          <div className="mw-wrap">
+            <Head id="mw-ai" title={<>AI <em>creative</em></>} sub="Poster series made with AI image tools, art-directed and typeset by me" />
+            <div className="mw-g3 stagger">
+              {aiPosters.map(([f, a]) => <img key={f} className="mw-pic a bl" src={w(f)} alt={a} loading="lazy" />)}
+            </div>
+            <div className="mw-head" style={{ marginTop: "96px" }}>
+              <h3 className="mw-h2 a fu" style={{ fontSize: "clamp(28px, 3vw, 36px)" }}>Spec ad concepts</h3>
+              <p className="mw-sub a fi">Self-initiated concepts for brands I admire — not commissioned</p>
+            </div>
+            <div className="mw-bento stagger">
+              {specAds.map(([f, a, big]) => <img key={f} className={`a bl${big ? " big" : ""}`} src={w(f)} alt={a} loading="lazy" />)}
+            </div>
+          </div>
+        </section>
+
+        {/* 13 + 1 · Brand identity */}
+        <section id="identity" className="mw-sec" aria-labelledby="mw-id">
+          <div className="mw-wrap">
+            <Head id="mw-id" title={<>Brand <em>identity</em></>} sub="Marks for an oilfield firm, a blog, a clothing label and a podcast" />
+            <div className="mw-g3 stagger">
+              {logos.map(([f, t, s]) => (
+                <figure key={f} className="mw-fig a fu">
+                  <div className="mw-logo-tile"><img src={w(f)} alt={`${t} — ${s}`} loading="lazy" /></div>
+                  <figcaption style={{ display: "flex", flexDirection: "column", gap: "2px" }}><span className="mw-cap-t">{t}</span><span className="mw-cap-s">{s}</span></figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 12 · Apparel */}
+        <section id="apparel" className="mw-sec" aria-labelledby="mw-app">
+          <div className="mw-wrap">
+            <Head id="mw-app" title={<>Apparel <em>graphics</em></>} sub="T-shirt concepts for Instire Clothing" />
+            <div className="mw-g4 stagger">
+              {tees.map(([f, a]) => <img key={f} className="mw-pic a sk" src={w(f)} alt={`${a} tee graphic`} loading="lazy" />)}
+            </div>
+          </div>
+        </section>
+
+        {/* 14 · Print */}
+        <section id="print" className="mw-sec" aria-labelledby="mw-print" style={{ overflow: "hidden" }}>
+          <div className="mw-wrap">
+            <Head id="mw-print" title={<>Print <em>&amp;</em> editorial</>} sub="GKF forum campaign, letters and the Petropath newsletter" />
+            <div className="mw-cols">
+              {printCols.map((col, i) => (
+                <div key={i} className={`mw-col a ${col.cls}`} style={col.offset ? { marginTop: "120px" } : undefined}>
+                  {col.items.map(([f, a]) => <img key={f} className="mw-pic" src={w(f)} alt={a} loading="lazy" />)}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 11 · Data */}
+        <section id="data" className="mw-sec" aria-labelledby="mw-data">
+          <div className="mw-wrap">
+            <Head id="mw-data" title={<>Data <em>visualization</em></>}>
+              <a className="mw-link a fi" data-magnetic href="https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes" target="_blank" rel="noreferrer">All dashboards on Tableau Public →</a>
+            </Head>
+            <div className="mw-g3 stagger">
+              {dashboards.map(([f, t, href]) => (
+                <article key={f} className="a fl" style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                  <img className="mw-pic" src={w(f)} alt={`${t} dashboard`} loading="lazy" style={{ border: "1px solid rgba(255,255,255,0.12)" }} />
+                  <h3 style={{ margin: 0, fontSize: "17px", fontWeight: 600 }}>{t}</h3>
+                  <p className="mw-cap-s" style={{ margin: 0 }}>Tableau dashboard</p>
+                  <a className="mw-link" data-magnetic href={href} target="_blank" rel="noreferrer">View interactive dashboard →</a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 18 · Toolkit */}
+        <section className="mw-sec" aria-labelledby="mw-about" style={{ paddingTop: "130px", paddingBottom: "130px" }}>
+          <div className="mw-wrap mw-split">
+            <h2 id="mw-about" className="mw-h2 a fu">Tool<em>kit</em></h2>
+            <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+              <p className="mw-fill a">I turn stories, brands and numbers into visuals people remember.</p>
+              <div className="mw-tools a fu">
+                {tools.map(t => <span key={t} className="mw-tool">{t}</span>)}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 22 · Contact */}
+        <section className="mw-contact" aria-labelledby="mw-contact">
+          <div className="mw-wrap mw-contact-in">
+            <h2 id="mw-contact" className="a fu" style={{ margin: 0, fontFamily: "var(--display)", fontWeight: 400, fontSize: "clamp(40px, 6vw, 80px)", lineHeight: 1.05, letterSpacing: "-1.5px", maxWidth: "860px" }}>Have a project in mind? Let's talk.</h2>
+            <div className="a fi" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+              <a className="mw-btn" data-magnetic href="mailto:gagan.97@gmail.com">Get in touch</a>
+              <a className="mw-btn" data-magnetic href="https://www.linkedin.com/in/gbn97/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a className="mw-btn" data-magnetic href="https://public.tableau.com/app/profile/gagan.bhaskar.naik/vizzes" target="_blank" rel="noreferrer">Tableau Public</a>
+            </div>
+          </div>
+        </section>
+      </main>
 
       <Footer links={[
         { label: "LinkedIn", href: "https://www.linkedin.com/in/gbn97/" },

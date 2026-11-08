@@ -8,7 +8,7 @@ export default defineConfig({
         react(),
         sitemap({
             hostname: 'https://www.gaganbn.in/',
-            dynamicRoutes: ['/', '/my-marketing-work', '/my-marketing-blog']
+            dynamicRoutes: ['/', '/my-marketing-work']
         })
     ],
 })

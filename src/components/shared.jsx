@@ -360,6 +360,9 @@ export function Skeleton({ height = "300px" }) {
     return <div style={{ width: "100%", height, background: "linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.05) 75%)", backgroundSize: "200% 100%", animation: "shimmer 1.5s infinite" }} />;
 }
 
+// External links open in a new tab
+const extLinkProps = (href) => /^https?:\/\//.test(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
+
 export function Nav({ links = [], pages = [] }) {
     const [scrolled, setScrolled] = useState(false);
     const [mob, setMob] = useState(false);
@@ -385,7 +388,7 @@ export function Nav({ links = [], pages = [] }) {
             </a>
             <div className="desk-nav" style={{ display: "flex", gap: "6px", alignItems: "center" }}>
                 {links.map(l => (
-                    <a key={l.label} href={l.href} data-magnetic
+                    <a key={l.label} href={l.href} {...extLinkProps(l.href)} data-magnetic
                         style={{
                             padding: l.active ? "7px 18px" : "6px 14px",
                             border: l.active ? "1px solid var(--saffron)" : "none",
@@ -402,7 +405,7 @@ export function Nav({ links = [], pages = [] }) {
                 ))}
                 {pages && pages.length > 0 && <span style={{ width: "1px", height: "16px", background: "rgba(255,255,255,0.2)", margin: "0 8px" }} />}
                 {pages && pages.map(l => (
-                    <a key={l.label} href={l.href} data-magnetic
+                    <a key={l.label} href={l.href} {...extLinkProps(l.href)} data-magnetic
                         style={{
                             padding: l.active ? "7px 18px" : "7px 18px",
                             border: l.active ? "1px solid var(--saffron)" : "1px solid rgba(255,255,255,0.2)",
@@ -434,7 +437,7 @@ export function Nav({ links = [], pages = [] }) {
                 {[0, 1, 2].map(i => <span key={i} style={{ display: "block", width: "20px", height: "1.5px", background: "#fff", transition: "all 0.3s", transform: mob ? (i === 0 ? "rotate(45deg) translateY(6.5px)" : i === 2 ? "rotate(-45deg) translateY(-6.5px)" : "scaleX(0)") : "none" }} />)}
             </button>
             {mob && <div style={{ position: "fixed", inset: 0, background: "rgba(8,6,4,0.97)", backdropFilter: "blur(30px)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "24px", zIndex: 999 }}>
-                {[...links, ...pages].map(l => <a key={l.label} href={l.href} onClick={() => setMob(false)} style={{ fontFamily: "var(--display)", fontSize: "28px", fontWeight: 600, color: l.active ? "var(--saffron)" : "#fff", textDecoration: "none" }}>{l.label}</a>)}
+                {[...links, ...pages].map(l => <a key={l.label} href={l.href} {...extLinkProps(l.href)} onClick={() => setMob(false)} style={{ fontFamily: "var(--display)", fontSize: "28px", fontWeight: 600, color: l.active ? "var(--saffron)" : "#fff", textDecoration: "none" }}>{l.label}</a>)}
             </div>}
         </nav>
     );
